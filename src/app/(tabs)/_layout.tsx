@@ -1,7 +1,8 @@
 import * as eva from "@eva-design/eva";
+import Foundation from "@expo/vector-icons/Foundation";
 import { Tabs } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ApplicationProvider } from "@ui-kitten/components";
+import { ApplicationProvider, Text } from "@ui-kitten/components";
 
 export default function TabsLayout() {
   return (
@@ -16,7 +17,29 @@ export default function TabsLayout() {
           <Tabs.Screen
             name="index"
             options={{
-              title: "Home",
+              tabBarLabel: ({ children, focused }) => (
+                <Text
+                  style={{
+                    textAlign: "center",
+                    width: "100%",
+                    fontSize: 10,
+                    fontWeight: "700",
+                    textTransform: "uppercase",
+                    color: focused ? "#0df2f2" : "#9dbbbb",
+                  }}
+                >
+                  {children}
+                </Text>
+              ),
+
+              title: "Główna",
+              tabBarIcon: ({ focused }) => (
+                <Foundation
+                  name="home"
+                  size={22}
+                  color={focused ? "#0df2f2" : "#9dbbbb"}
+                />
+              ),
             }}
           />
 

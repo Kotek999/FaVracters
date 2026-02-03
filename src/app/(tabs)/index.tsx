@@ -1,6 +1,7 @@
 import { Layout, Text, Button } from "@ui-kitten/components";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { fonts } from "../../theme/fonts";
 
 export default function Home() {
   return (
@@ -13,8 +14,11 @@ export default function Home() {
       }}
     >
       <SafeAreaView>
-        <Text category="h3" style={{ color: "white" }}>
+        <Text style={{ fontFamily: fonts.bold, color: "white" }}>
           HOME SCREEN
+        </Text>
+        <Text style={{ fontFamily: fonts.medium, color: "red" }}>
+          dwkowkokdwokw
         </Text>
         <Button
           appearance="ghost"
