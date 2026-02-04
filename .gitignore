@@ -18,6 +18,10 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
+# Private Assets
+src/assets/images/*
+!src/assets/images/.gitkeep
+
 # Metro
 .metro-health-check*
 
