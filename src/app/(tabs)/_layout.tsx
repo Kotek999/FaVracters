@@ -83,9 +83,9 @@ export default function TabsLayout() {
           />
 
           <Tabs.Screen
-            name="third"
+            name="case"
             options={{
-              title: "Third",
+              title: "Case Screen",
             }}
           />
 
