@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Tabs } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ApplicationProvider, Text, Avatar } from "@ui-kitten/components";
-import { fonts } from "../../theme/fonts";
+import { fonts } from "@/theme/fonts";
 
 export default function TabsLayout() {
   return (

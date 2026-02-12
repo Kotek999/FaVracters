@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Animated from "react-native-reanimated";
 import { View, Image, Pressable, Text, StyleSheet } from "react-native";
 import { BOX_SIZE } from "../consts";
-import { PreRollViewProps } from "../types";
+import type { PreRollViewProps } from "../types";
 
 export const PreRollView = memo(function PreRollView({
   source,

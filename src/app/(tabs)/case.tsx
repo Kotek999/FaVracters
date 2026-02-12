@@ -1,1 +1,1 @@
-export { default } from "../../screens/CaseScreen";
+export { default } from "@/screens/CaseScreen";

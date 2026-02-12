@@ -1,5 +1,5 @@
-import { CaseItem } from "../types";
 import { STRIP_LENGTH, WINNER_INDEX } from "../consts";
+import type { CaseItem } from "../types";
 
 export const generateStrip = (
   items: readonly CaseItem[],

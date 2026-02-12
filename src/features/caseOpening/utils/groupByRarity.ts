@@ -1,4 +1,4 @@
-import { CaseItem, Rarity } from "../types";
+import type { CaseItem, Rarity } from "../types";
 
 export const groupByRarity = (items: readonly CaseItem[]) => {
   const map: Record<Rarity, CaseItem[]> = {

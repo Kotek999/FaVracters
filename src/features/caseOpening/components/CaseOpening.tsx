@@ -11,9 +11,9 @@ import { groupByRarity } from "../utils/groupByRarity";
 import { generateStrip } from "../utils/generateStrip";
 import { Card } from "./Card";
 import { ResultView } from "./ResultView";
-import { screenWidth } from "../../../utils/dimensions";
+import { screenWidth } from "@/utils/dimensions";
 import { FULL_WIDTH, ITEM_WIDTH } from "../consts";
-import { CaseOpeningProps, CaseItem, Stage } from "../types";
+import type { CaseOpeningProps, CaseItem, Stage } from "../types";
 
 export const CaseOpening = ({
   items,

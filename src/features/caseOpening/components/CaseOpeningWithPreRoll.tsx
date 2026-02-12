@@ -11,7 +11,7 @@ export default function CaseOpeningWithPreRoll({
   items,
   onWin,
 }: CaseOpeningWithPreRollProps) {
-  const source = require("../../../assets/images/image_example_2.png");
+  const source = require("@/assets/images/image_example_2.png");
 
   const pity = usePitySystem();
   const preRoll = usePreRollAnimation(MOVE);

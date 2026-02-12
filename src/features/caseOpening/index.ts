@@ -1,2 +1,2 @@
 export { default as CaseOpeningWithPreRoll } from "./components/CaseOpeningWithPreRoll";
-export type { CaseItem, CaseOpeningProps } from "./types";
+export type * from "./types";

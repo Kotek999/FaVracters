@@ -5,8 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import { StyleSheet, ImageBackground, View } from "react-native";
-import { screenWidth, screenHeight } from "../../utils/dimensions";
-import { AppScrollView } from "../../components/layout/AppScrollView";
+import { screenWidth, screenHeight } from "@/utils/dimensions";
+import { AppScrollView } from "@/components/layout/AppScrollView";
 import { StatusBar } from "expo-status-bar";
 
 export default function Home() {

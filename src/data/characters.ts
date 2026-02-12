@@ -1,4 +1,4 @@
-import { CaseItem } from "../features/caseOpening";
+import type { CaseItem } from "@/features/caseOpening";
 
 const img = (seed: string) =>
   `https://api.dicebear.com/7.x/adventurer/png?seed=${seed}`;

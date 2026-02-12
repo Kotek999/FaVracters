@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import { Card } from "./Card";
-import { ResultViewProps } from "../types";
+import type { ResultViewProps } from "../types";
 
 export const ResultView = ({
   winner,
