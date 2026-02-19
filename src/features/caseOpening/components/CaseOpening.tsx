@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -14,6 +14,7 @@ import { ResultView } from "./ResultView";
 import { screenWidth } from "@/utils/dimensions";
 import { FULL_WIDTH, ITEM_WIDTH } from "../consts";
 import type { CaseOpeningProps, CaseItem, Stage } from "../types";
+import { useCollectionStore } from "@/store/hooks/useCollectionStore";
 
 export const CaseOpening = ({
   items,
@@ -35,10 +36,20 @@ export const CaseOpening = ({
     transform: [{ translateX: tx.value }],
   }));
 
+  const addItem = useCollectionStore((state) => state.addItem);
+
   const handleWin = (item: CaseItem) => {
     setWinner(item);
     setStage("result");
     onWin?.(item);
+
+    const result = addItem(item.id);
+
+    if (result.isDuplicate) {
+      Alert.alert("Duplikat!", `Masz już ${result.count - 1} kopii`);
+    } else {
+      Alert.alert("Nowa karta!", "Dodano do kolekcji");
+    }
   };
 
   const handleOpenAgain = () => {

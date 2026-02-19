@@ -1,14 +1,14 @@
 import React, { memo } from "react";
 import { StyleSheet, Image } from "react-native";
 import { ITEM_WIDTH, ITEM_HEIGHT, ITEM_SPACING, rarityColor } from "../consts";
-import { CaseItem } from "../types";
+import type { CaseItem } from "../types";
 
 export const Card = memo(({ item }: { item: CaseItem }) => {
   const isLegendary = item.rarity === "legendary";
 
   return (
     <Image
-      source={{ uri: item.image }}
+      source={{ uri: item.image as string }}
       style={[
         styles.image,
         {

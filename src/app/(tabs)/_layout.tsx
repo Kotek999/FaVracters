@@ -5,6 +5,7 @@ import { Tabs } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ApplicationProvider, Text, Avatar } from "@ui-kitten/components";
 import { fonts } from "@/theme/fonts";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabsLayout() {
   return (
@@ -13,7 +14,10 @@ export default function TabsLayout() {
         <Tabs
           screenOptions={{
             animation: "fade",
-            tabBarStyle: { backgroundColor: "#132525", borderColor: "#1da5a5" },
+            tabBarStyle: {
+              backgroundColor: "#142c2c",
+              borderColor: "#1da5a5",
+            },
           }}
         >
           <Tabs.Screen
@@ -21,7 +25,7 @@ export default function TabsLayout() {
             options={{
               headerShown: true,
               headerStyle: {
-                backgroundColor: "#132525",
+                backgroundColor: "#142c2c",
                 borderBottomWidth: 0.5,
                 borderBottomColor: "#1e4e4e",
               },
@@ -78,7 +82,29 @@ export default function TabsLayout() {
           <Tabs.Screen
             name="second"
             options={{
-              title: "Second",
+              headerShown: false,
+              tabBarLabel: ({ children, focused }) => (
+                <Text
+                  style={{
+                    textAlign: "center",
+                    width: "100%",
+                    fontSize: 10,
+                    fontFamily: fonts.semibold,
+                    textTransform: "uppercase",
+                    color: focused ? "#0df2f2" : "#9dbbbb",
+                  }}
+                >
+                  {children}
+                </Text>
+              ),
+              title: "Kolekcja",
+              tabBarIcon: ({ focused }) => (
+                <Ionicons
+                  name="grid"
+                  size={22}
+                  color={focused ? "#0df2f2" : "#9dbbbb"}
+                />
+              ),
             }}
           />
 

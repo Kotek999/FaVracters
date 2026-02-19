@@ -13,7 +13,7 @@ export type AnimatedViewStyle = AnimatedStyle<StyleProp<ViewStyle>>;
 export interface CaseItem {
   readonly id: string;
   readonly name: string;
-  readonly image: string;
+  readonly image: ImageSourcePropType | string;
   readonly rarity: Rarity;
 }
 
@@ -26,12 +26,12 @@ export interface CaseOpeningProps {
   readonly autoSpin?: boolean;
 }
 
-export type ResultViewProps = {
+export interface ResultViewProps {
   readonly winner: CaseItem;
   readonly pityChance: number;
   readonly onSpin: () => void;
   readonly onBack: () => void;
-};
+}
 
 export interface PreRollViewProps {
   readonly source: ImageSourcePropType;

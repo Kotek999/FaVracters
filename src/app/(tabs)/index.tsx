@@ -15,7 +15,7 @@ export default function Home() {
       style={{
         flex: 1,
         top: 60,
-        backgroundColor: "#132525",
+        backgroundColor: "#142c2c",
         justifyContent: "center",
         alignItems: "center",
       }}
