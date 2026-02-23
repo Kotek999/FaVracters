@@ -28,15 +28,14 @@
       "favicon": "./assets/favicon.png",
       "build": {
         "babel": {
-          "include": [
-            "@ui-kitten/components"
-          ]
+          "include": ["@ui-kitten/components"]
         }
       }
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ]
+    "plugins": ["expo-router", "expo-font"],
+    "backgroundColor": "#142c2c",
+    "androidStatusBar": {
+      "translucent": true
+    }
   }
 }

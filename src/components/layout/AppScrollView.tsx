@@ -1,4 +1,4 @@
-import { ScrollView, ScrollViewProps } from "react-native";
+import { ScrollView, ScrollViewProps, View } from "react-native";
 import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export function AppScrollView({ children, ...props }: ScrollViewProps) {
@@ -6,16 +6,16 @@ export function AppScrollView({ children, ...props }: ScrollViewProps) {
 
   return (
     <ScrollView
-      style={{
-        marginBottom: 0,
-      }}
       contentContainerStyle={{
-        paddingBottom: insets.bottom,
+        flexGrow: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingBottom: insets.top,
       }}
       showsVerticalScrollIndicator={false}
       {...props}
     >
-      {children}
+      <View style={{ flex: 1 }}>{children}</View>
     </ScrollView>
   );
 }
