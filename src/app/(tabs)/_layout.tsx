@@ -173,7 +173,93 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="case"
           options={{
-            title: "Case Screen",
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#142c2c",
+              borderBottomWidth: 1,
+              borderBottomColor: "#1e4e4e",
+            },
+            headerTitleStyle: {
+              width: "100%",
+              fontSize: 18,
+              fontFamily: fonts.bold,
+              textTransform: "uppercase",
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerLeftContainerStyle: {
+              marginStart: 22,
+            },
+            headerRightContainerStyle: { marginEnd: 22 },
+            headerLeft: () => (
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  width: 35,
+                  height: 35,
+                  backgroundColor: "#1f3f3fb9",
+                  borderWidth: 1,
+                  borderColor: "#246969",
+                  borderRadius: 10,
+                }}
+                onPress={() => router.back()}
+              >
+                <MaterialCommunityIcons
+                  name="arrow-left"
+                  size={18}
+                  color="red"
+                />
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  width: 70,
+                  height: 35,
+                  backgroundColor: "#1f3f3fb9",
+                  borderWidth: 1,
+                  borderColor: "#246969",
+                  borderRadius: 16,
+                  gap: 5,
+                }}
+                onPress={() => alert("energy action clicked...")}
+              >
+                <MaterialCommunityIcons
+                  name="lightning-bolt"
+                  size={18}
+                  color="red"
+                />
+                <Text style={{ color: "red" }}>- - - -</Text>
+              </TouchableOpacity>
+            ),
+            tabBarLabel: ({ children, focused }) => (
+              <Text
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  fontSize: 10,
+                  fontFamily: fonts.semibold,
+                  textTransform: "uppercase",
+                  color: focused ? "#0df2f2" : "#9dbbbb",
+                }}
+              >
+                {children}
+              </Text>
+            ),
+            title: "Skrzynki",
+            tabBarIcon: ({ focused }) => (
+              <MaterialCommunityIcons
+                name="treasure-chest"
+                size={22}
+                color={focused ? "#0df2f2" : "#9dbbbb"}
+              />
+            ),
           }}
         />
 
