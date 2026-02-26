@@ -1,6 +1,5 @@
-import { CaseOpeningWithPreRoll } from "@/features/caseOpening";
-import { characters } from "@/data/characters";
+import { Case } from "@/features/caseOpening/components/Case";
 
 export default function CaseScreen() {
-  return <CaseOpeningWithPreRoll items={characters} />;
+  return <Case />;
 }

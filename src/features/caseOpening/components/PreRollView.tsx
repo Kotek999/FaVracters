@@ -41,7 +41,6 @@ export const PreRollView = memo(function PreRollView({
 
       <View
         style={{
-          margin: 10,
           flexDirection: "row",
           alignItems: "center",
           gap: 10,
@@ -70,7 +69,6 @@ export const PreRollView = memo(function PreRollView({
 
       <View
         style={{
-          margin: 10,
           width: screenWidth - 40,
           justifyContent: "center",
           borderRadius: 16,
@@ -82,7 +80,7 @@ export const PreRollView = memo(function PreRollView({
           style={{
             // borderWidth: 1,
             // borderColor: "red",
-            height: screenHeight / 3.7,
+            height: screenHeight / 4,
             overflow: "hidden",
             padding: 25,
             borderRadius: 40,
@@ -273,7 +271,7 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     marginTop: 10,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
   },
 

@@ -18,7 +18,17 @@ export default function RootLayout() {
             backgroundColor: "#142c2c",
           },
         }}
-      />
+      >
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen
+          name="caseSpin"
+          options={{
+            headerShown: false,
+            presentation: "card",
+            animation: "fade",
+          }}
+        />
+      </Stack>
     </SafeAreaProvider>
   );
 }

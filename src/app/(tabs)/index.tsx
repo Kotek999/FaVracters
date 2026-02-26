@@ -138,7 +138,7 @@ export default function Home() {
                     style={{
                       backgroundColor: "#0df2f2",
                     }}
-                    onPress={() => router.push("/second")}
+                    onPress={() => router.push("/case")}
                   >
                     TEST
                   </Button>
