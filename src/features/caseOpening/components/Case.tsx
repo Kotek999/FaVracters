@@ -144,7 +144,7 @@ export const Case = () => {
                   justifyContent: "center",
                   borderRadius: 20,
                 }}
-                onPress={() => alert("shop icon pressed...")}
+                onPress={() => router.push("/shop")}
               >
                 <MaterialIcons name="shopping-cart" size={24} />
               </TouchableOpacity>

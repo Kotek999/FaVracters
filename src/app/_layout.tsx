@@ -25,7 +25,15 @@ export default function RootLayout() {
           options={{
             headerShown: false,
             presentation: "card",
-            animation: "fade",
+            animation: "slide_from_right",
+          }}
+        />
+        <Stack.Screen
+          name="shop"
+          options={{
+            headerShown: false,
+            presentation: "card",
+            animation: "simple_push",
           }}
         />
       </Stack>
