@@ -7,7 +7,7 @@ import {
   ImageSourcePropType,
   ImageURISource,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { CaseItem } from "@/features/caseOpening";
 import { CARD_ITEM_MARGIN, CARD_ITEM_WIDTH } from "../consts";
@@ -98,19 +98,39 @@ export const CardItem = ({
           </Text>
         </View>
         {isUnlocked && (
-          <View
-            style={{
-              position: "absolute",
-              top: 12,
-              left: 12,
-              backgroundColor: rarityColor[item.rarity],
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 8,
-            }}
-          >
-            <Text style={styles.countText}>{item.rarity}</Text>
-          </View>
+          <>
+            <View
+              style={{
+                position: "absolute",
+                top: 12,
+                left: 12,
+                backgroundColor: rarityColor[item.rarity],
+                paddingHorizontal: 8,
+                paddingVertical: 4,
+                borderRadius: 8,
+              }}
+            >
+              <Text style={styles.countText}>{item.rarity}</Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                backgroundColor: "orange",
+                paddingHorizontal: 8,
+                paddingVertical: 4,
+                borderRadius: 8,
+              }}
+              onPress={() => router.push(`/card/${item.id}`)}
+            >
+              <MaterialCommunityIcons
+                name="information"
+                size={22}
+                color="black"
+              />
+            </TouchableOpacity>
+          </>
         )}
         {!isUnlocked && (
           <View style={styles.lockedOverlay}>
@@ -125,7 +145,7 @@ export const CardItem = ({
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => router.push("/second-details-test")}
+              onPress={() => alert("Dostęp zablokowany (Nie odkryto bohatera)")}
             >
               <MaterialIcons name="lock" size={28} color="lightgray" />
             </TouchableOpacity>
