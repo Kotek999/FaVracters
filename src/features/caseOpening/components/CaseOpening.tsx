@@ -15,6 +15,8 @@ import { screenWidth } from "@/utils/dimensions";
 import { FULL_WIDTH, ITEM_WIDTH } from "../consts";
 import type { CaseOpeningProps, CaseItem, Stage } from "../types";
 import { useCollectionStore } from "@/store/hooks/useCollectionStore";
+import { AppScrollView } from "@/components/layout/AppScrollView";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const CaseOpening = ({
   items,
@@ -104,12 +106,16 @@ export const CaseOpening = ({
         </View>
       )}
       {stage === "result" && winner && (
-        <ResultView
-          winner={winner}
-          pityChance={pityChance}
-          onSpin={handleOpenAgain}
-          onBack={onReset}
-        />
+        <SafeAreaView style={{ flex: 1 }} edges={["top", "bottom"]}>
+          <AppScrollView>
+            <ResultView
+              winner={winner}
+              pityChance={pityChance}
+              onSpin={handleOpenAgain}
+              onBack={onReset}
+            />
+          </AppScrollView>
+        </SafeAreaView>
       )}
     </View>
   );
