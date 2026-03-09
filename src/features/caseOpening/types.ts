@@ -13,7 +13,7 @@ export type AnimatedViewStyle = AnimatedStyle<StyleProp<ViewStyle>>;
 export interface CaseItem {
   readonly id: string;
   readonly name: string;
-  readonly image: ImageSourcePropType | string;
+  readonly image: string;
   readonly rarity: Rarity;
 }
 

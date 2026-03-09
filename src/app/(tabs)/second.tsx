@@ -1,24 +1,21 @@
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  ImageSourcePropType,
-} from "react-native";
+import { useCallback } from "react";
+import { View, Text, FlatList, StyleSheet, ListRenderItem } from "react-native";
 import { characters } from "@/data/characters";
-import { rarityColor } from "@/features/caseOpening/consts";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProgressBar } from "@ui-kitten/components";
 import { FilterButton } from "@/features/collection/components/FilterButton";
-import { CardItem } from "@/features/collection/components/CardItem";
+import { RenderCardItem } from "@/features/collection/components/CardItem";
 import { HORIZONTAL_PADDING } from "@/features/collection/consts";
 import { useCollectionFilters } from "@/features/collection/hooks/useCollectionFilters";
+import type { CaseItem } from "@/features/caseOpening";
 
 const CollectionScreen = () => {
   const { filterMode, setFilterMode, filteredData } =
     useCollectionFilters(characters);
 
-  const lockedImage: ImageSourcePropType = require("@/assets/images/image_example_1.png");
+  const renderItem: ListRenderItem<CaseItem> = useCallback(({ item }) => {
+    return <RenderCardItem item={item} />;
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
@@ -70,26 +67,17 @@ const CollectionScreen = () => {
         />
       </View>
       <FlatList
+        removeClippedSubviews
+        maxToRenderPerBatch={8}
+        windowSize={5}
+        initialNumToRender={8}
+        updateCellsBatchingPeriod={50}
         data={filteredData}
         keyExtractor={(item) => item.id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.flatListContentContainer}
-        renderItem={({ item }) => {
-          const imageSource = item.isUnlocked
-            ? { uri: item.image }
-            : lockedImage;
-
-          return (
-            <CardItem
-              item={item}
-              isUnlocked={item.isUnlocked}
-              count={item.count}
-              imageSource={imageSource}
-              rarityColor={rarityColor}
-            />
-          );
-        }}
+        renderItem={renderItem}
         ListEmptyComponent={
           <View style={{ alignItems: "center" }}>
             <Text style={{ color: "cyan" }}>Brak zdjęć</Text>

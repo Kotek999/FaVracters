@@ -229,6 +229,7 @@ export const ResultView = ({
         />
       </View>
       <Button title="<- Powrót" onPress={onBack} />
+      <Button title="Do kolekcji" onPress={() => router.push("/second")} />
     </View>
   );
 };

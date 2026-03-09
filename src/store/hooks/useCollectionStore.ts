@@ -1,46 +1,86 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { zustandStorage } from "../storage";
-
-export interface CollectionState {
-  readonly items: Record<string, number>;
-  readonly addItem: (id: string) => { isDuplicate: boolean; count: number };
-  readonly clear: () => void;
-  readonly clearStorage: () => Promise<void>;
-}
+import { immer } from "zustand/middleware/immer";
+import { DUPLICATE_XP, getXpNeeded, MAX_LEVEL } from "../collection/xpSystem";
+import type {
+  CollectionState,
+  CollectionActions,
+  CardProgress,
+} from "../types";
 
 const STORAGE_KEY = "collection-storage";
 
-const initialState = (): Pick<CollectionState, "items"> => ({
+const initialState = (): Omit<CollectionState, CollectionActions> => ({
   items: {},
 });
 
 export const useCollectionStore = create<CollectionState>()(
   persist(
-    (set) => ({
-      ...initialState(),
+    immer((set, get) => ({
+      items: {},
 
-      addItem: (id: string) => {
-        let result = { isDuplicate: false, count: 0 };
+      addDuplicate: (id, rarity) => {
+        const state = get();
+        const current = state.items[id];
+        const xpGain = DUPLICATE_XP[rarity];
 
-        set((state) => {
-          const current = state.items[id] ?? 0;
-          const newCount = current + 1;
-
-          result = {
-            isDuplicate: current > 0,
-            count: newCount,
+        if (!current) {
+          const newCard: CardProgress = {
+            level: 1,
+            xp: 0,
+            copies: 1,
+            rarity,
           };
 
-          return {
+          set({
             items: {
               ...state.items,
-              [id]: newCount,
+              [id]: newCard,
             },
+          });
+
+          return {
+            isNew: true,
+            xpGained: 0,
+            currentLevel: 1,
           };
+        }
+
+        const updated: CardProgress = {
+          ...current,
+          xp: current.xp + xpGain,
+          copies: current.copies + 1,
+        };
+
+        set({
+          items: {
+            ...state.items,
+            [id]: updated,
+          },
         });
 
-        return result;
+        return {
+          isNew: false,
+          xpGained: xpGain,
+          currentLevel: updated.level,
+        };
+      },
+
+      levelUp: (id, rarity) => {
+        set((s) => {
+          const card = s.items[id];
+          if (!card) return;
+
+          if (card.level >= MAX_LEVEL) return;
+
+          const needed = getXpNeeded(rarity, card.level);
+
+          if (card.xp < needed) return;
+
+          card.xp -= needed;
+          card.level += 1;
+        });
       },
 
       clear: () => {
@@ -51,7 +91,7 @@ export const useCollectionStore = create<CollectionState>()(
         await useCollectionStore.persist.clearStorage();
         set(initialState());
       },
-    }),
+    })),
     {
       name: STORAGE_KEY,
       storage: zustandStorage,

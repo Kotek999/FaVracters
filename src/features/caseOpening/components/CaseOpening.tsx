@@ -13,10 +13,10 @@ import { Card } from "./Card";
 import { ResultView } from "./ResultView";
 import { screenWidth } from "@/utils/dimensions";
 import { FULL_WIDTH, ITEM_WIDTH } from "../consts";
-import type { CaseOpeningProps, CaseItem, Stage } from "../types";
 import { useCollectionStore } from "@/store/hooks/useCollectionStore";
 import { AppScrollView } from "@/components/layout/AppScrollView";
 import { SafeAreaView } from "react-native-safe-area-context";
+import type { CaseOpeningProps, CaseItem, Stage } from "../types";
 
 export const CaseOpening = ({
   items,
@@ -38,19 +38,22 @@ export const CaseOpening = ({
     transform: [{ translateX: tx.value }],
   }));
 
-  const addItem = useCollectionStore((state) => state.addItem);
-
   const handleWin = (item: CaseItem) => {
     setWinner(item);
     setStage("result");
     onWin?.(item);
 
-    const result = addItem(item.id);
+    const result = useCollectionStore
+      .getState()
+      .addDuplicate(item.id, item.rarity);
 
-    if (result.isDuplicate) {
-      Alert.alert("Duplikat!", `Masz już ${result.count - 1} kopii`);
+    if (result.isNew) {
+      Alert.alert(
+        "Nowa karta!",
+        `${item.name} dodana do kolekcji\nLevel ${result.currentLevel}`,
+      );
     } else {
-      Alert.alert("Nowa karta!", "Dodano do kolekcji");
+      Alert.alert("Duplikat!", `+${result.xpGained} XP`);
     }
   };
 

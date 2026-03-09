@@ -1,138 +1,76 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ImageSourcePropType,
-  ImageURISource,
-} from "react-native";
+import { memo } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { CaseItem } from "@/features/caseOpening";
 import { CARD_ITEM_MARGIN, CARD_ITEM_WIDTH } from "../consts";
 import { screenHeight } from "@/utils/dimensions";
+import { rarityColor } from "@/features/caseOpening/consts";
+import { useCardItemLevel } from "../hooks/useCardItemLevel";
+import { DiamondLevel } from "./DiamondLevel";
+import { ProgressBar } from "./ProgressBar";
+import type { CardItemProps } from "../types";
 
-type ImageSource =
-  | number
-  | ImageURISource
-  | ImageURISource[]
-  | {
-      uri: string | ImageSourcePropType;
-    };
+export const CardItem = memo(({ item }: CardItemProps) => {
+  const {
+    progress,
+    imageSource,
+    level,
+    xp,
+    xpNeeded,
+    handleLevelUp,
+    canLevelUp,
+  } = useCardItemLevel({ item: item });
 
-type RarityColor = {
-  common: string;
-  rare: string;
-  epic: string;
-  legendary: string;
-};
-
-interface CardItemProps {
-  readonly item: CaseItem;
-  readonly isUnlocked: boolean;
-  readonly count: number;
-  readonly imageSource: ImageSource;
-  readonly rarityColor: RarityColor;
-}
-
-export const CardItem = ({
-  item,
-  isUnlocked,
-  count,
-  imageSource,
-  rarityColor,
-}: CardItemProps) => {
-  return (
-    <View
-      style={[
-        styles.cardContainer,
-        isUnlocked ? styles.unlockedCard : styles.lockedCard,
-      ]}
-    >
-      <View
-        style={{
-          ...styles.imageWrapper,
-        }}
-      >
-        <Image
-          source={imageSource as ImageSourcePropType}
-          style={[styles.image, !isUnlocked && { opacity: 0.4 }]}
-          resizeMode="cover"
-        />
+  if (!progress)
+    return (
+      <View style={[styles.cardContainer, styles.lockedCard]}>
         <View
           style={{
-            backgroundColor: "#1e4e4e",
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: screenHeight / 13,
-            justifyContent: "flex-end",
-            padding: 12,
+            ...styles.imageWrapper,
           }}
         >
-          <Text
+          <Image
+            source={imageSource}
+            style={[styles.image, { opacity: 0.4 }]}
+            resizeMode="cover"
+          />
+          <View
             style={{
-              color: "white",
-              fontSize: 16,
-              fontWeight: "bold",
-              textShadowColor: "rgba(0,0,0,0.8)",
-              textShadowOffset: { width: 0, height: 2 },
-              textShadowRadius: 6,
+              backgroundColor: "#1e4e4e",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: screenHeight / 13,
+              justifyContent: "flex-end",
+              padding: 12,
             }}
           >
-            {isUnlocked ? item.name : "Nie znany"}
-          </Text>
-          <Text
-            style={{
-              color: "white",
-              fontSize: 12,
-              fontWeight: "bold",
-              textShadowColor: "rgba(0,0,0,0.8)",
-              textShadowOffset: { width: 0, height: 2 },
-              textShadowRadius: 6,
-            }}
-          >
-            dwwdd
-          </Text>
-        </View>
-        {isUnlocked && (
-          <>
-            <View
+            <Text
               style={{
-                position: "absolute",
-                top: 12,
-                left: 12,
-                backgroundColor: rarityColor[item.rarity],
-                paddingHorizontal: 8,
-                paddingVertical: 4,
-                borderRadius: 8,
+                color: "white",
+                fontSize: 16,
+                fontWeight: "bold",
+                textShadowColor: "rgba(0,0,0,0.8)",
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 6,
               }}
             >
-              <Text style={styles.countText}>{item.rarity}</Text>
-            </View>
-            <TouchableOpacity
+              Nie znany
+            </Text>
+            <Text
               style={{
-                position: "absolute",
-                top: 12,
-                right: 12,
-                backgroundColor: "orange",
-                paddingHorizontal: 8,
-                paddingVertical: 4,
-                borderRadius: 8,
+                color: "white",
+                fontSize: 12,
+                fontWeight: "bold",
+                textShadowColor: "rgba(0,0,0,0.8)",
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 6,
               }}
-              onPress={() => router.push(`/card/${item.id}`)}
             >
-              <MaterialCommunityIcons
-                name="information"
-                size={22}
-                color="black"
-              />
-            </TouchableOpacity>
-          </>
-        )}
-        {!isUnlocked && (
+              dwwdd
+            </Text>
+          </View>
           <View style={styles.lockedOverlay}>
             <TouchableOpacity
               style={{
@@ -150,39 +88,125 @@ export const CardItem = ({
               <MaterialIcons name="lock" size={28} color="lightgray" />
             </TouchableOpacity>
           </View>
-        )}
-      </View>
-      {isUnlocked && (
-        <View style={styles.countBadge}>
-          <Text style={styles.countText}>x{count}</Text>
         </View>
-      )}
+      </View>
+    );
+
+  return (
+    <View
+      style={[
+        styles.cardContainer,
+        {
+          borderColor: rarityColor[item.rarity],
+          shadowColor: rarityColor[item.rarity],
+          shadowOpacity: 0.9,
+          shadowRadius: 20,
+          elevation: 10,
+          borderWidth: 2,
+          borderRadius: 16,
+        },
+      ]}
+    >
+      <View style={styles.imageWrapper}>
+        <Image source={imageSource} style={styles.image} resizeMode="cover" />
+
+        <DiamondLevel item={item} level={level} />
+
+        <View
+          style={{
+            position: "absolute",
+            bottom: 65,
+            left: 0,
+            right: 0,
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 0,
+          }}
+        >
+          <ProgressBar
+            xp={xp}
+            xpNeeded={xpNeeded}
+            canLevelUp={canLevelUp}
+            handleLevelUp={handleLevelUp}
+          />
+        </View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#1e4e4e",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: screenHeight / 13,
+            justifyContent: "center",
+          }}
+          onPress={() => router.push(`/card/${item.id}`)}
+        >
+          <View
+            style={{
+              marginHorizontal: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  textShadowColor: "rgba(0,0,0,0.8)",
+                  textShadowOffset: { width: 0, height: 2 },
+                  textShadowRadius: 6,
+                }}
+              >
+                {item.name}
+              </Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  textShadowColor: "rgba(0,0,0,0.8)",
+                  textShadowOffset: { width: 0, height: 2 },
+                  textShadowRadius: 6,
+                }}
+              >
+                dwwdd
+              </Text>
+            </View>
+            <MaterialCommunityIcons name="arrow-right" size={28} color="lime" />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
-};
+});
+
+export const RenderCardItem = memo(
+  CardItem,
+  (prev, next) =>
+    prev.item.id === next.item.id && prev.item.rarity === next.item.rarity,
+);
 
 const styles = StyleSheet.create({
   cardContainer: {
     width: CARD_ITEM_WIDTH,
     margin: CARD_ITEM_MARGIN,
-    aspectRatio: 0.8,
-  },
-
-  unlockedCard: {
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#246969",
+    aspectRatio: 0.7,
   },
 
   lockedCard: {
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#246969",
-    borderStyle: "dashed",
     opacity: 0.8,
   },
 
   imageWrapper: {
+    shadowColor: "#237c7c",
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 20,
     flex: 1,
     borderRadius: 16,
     overflow: "hidden",
@@ -201,20 +225,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.6)",
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  countBadge: {
-    position: "absolute",
-    bottom: 12,
-    right: 12,
-    backgroundColor: "lime",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-
-  countText: {
-    color: "black",
-    fontWeight: "600",
   },
 });
