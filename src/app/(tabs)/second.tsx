@@ -1,5 +1,6 @@
 import { useCallback } from "react";
-import { View, Text, FlatList, StyleSheet, ListRenderItem } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { characters } from "@/data/characters";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProgressBar } from "@ui-kitten/components";
@@ -8,14 +9,17 @@ import { RenderCardItem } from "@/features/collection/components/CardItem";
 import { HORIZONTAL_PADDING } from "@/features/collection/consts";
 import { useCollectionFilters } from "@/features/collection/hooks/useCollectionFilters";
 import type { CaseItem } from "@/features/caseOpening";
+import type { CardItemProps } from "@/features/collection/types";
 
 const CollectionScreen = () => {
   const { filterMode, setFilterMode, filteredData } =
     useCollectionFilters(characters);
 
-  const renderItem: ListRenderItem<CaseItem> = useCallback(({ item }) => {
+  const renderItem = useCallback(({ item }: CardItemProps) => {
     return <RenderCardItem item={item} />;
   }, []);
+
+  const keyExtractor = useCallback((item: CaseItem) => item.id, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
@@ -66,18 +70,16 @@ const CollectionScreen = () => {
           onPress={() => setFilterMode("missing")}
         />
       </View>
-      <FlatList
-        removeClippedSubviews
-        maxToRenderPerBatch={8}
-        windowSize={5}
-        initialNumToRender={8}
-        updateCellsBatchingPeriod={50}
+      <FlashList
+        key={filterMode}
         data={filteredData}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.flatListContentContainer}
         renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        numColumns={2}
+        contentContainerStyle={styles.flatListContentContainer}
+        showsVerticalScrollIndicator={false}
+        drawDistance={200}
+        removeClippedSubviews
         ListEmptyComponent={
           <View style={{ alignItems: "center" }}>
             <Text style={{ color: "cyan" }}>Brak zdjęć</Text>
