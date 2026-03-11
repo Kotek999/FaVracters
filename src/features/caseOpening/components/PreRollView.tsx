@@ -1,12 +1,20 @@
 import React, { memo } from "react";
 import Animated from "react-native-reanimated";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { BOX_SIZE } from "../consts";
-import type { PreRollViewProps } from "../types";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { BlurView } from "expo-blur";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { userStore } from "@/features/user/store/userStore";
+import { PreRollViewProps } from "../types";
 
 export const PreRollView = memo(function PreRollView({
   source,
@@ -22,6 +30,18 @@ export const PreRollView = memo(function PreRollView({
     { key: "bl", style: styleBL, tx: 0, ty: -BOX_SIZE / 2 },
     { key: "br", style: styleBR, tx: -BOX_SIZE / 2, ty: -BOX_SIZE / 2 },
   ] as const;
+
+  const cases = userStore((state) => state.cases);
+
+  const test = () => {
+    const canOpen = userStore.getState().useCase();
+
+    if (!canOpen) {
+      Alert.alert("Brak skrzynek!");
+      return;
+    }
+    onOpen();
+  };
 
   return (
     <View style={styles.center}>
@@ -43,30 +63,11 @@ export const PreRollView = memo(function PreRollView({
         style={{
           flexDirection: "row",
           alignItems: "center",
-          gap: 10,
+          gap: 5,
         }}
       >
-        <Text style={{ color: "red" }}>Koszt otwarcia: </Text>
-        <View
-          style={{
-            width: 120,
-            height: 35,
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-            flexDirection: "row",
-            borderRadius: 16,
-            backgroundColor: "#1f3f3fb9",
-            borderWidth: 1,
-            borderColor: "#246969",
-            gap: 5,
-          }}
-        >
-          <MaterialCommunityIcons name="lightning-bolt" size={18} color="red" />
-          <Text style={{ color: "red" }}>500 energii</Text>
-        </View>
+        <Text style={{ color: "red" }}>Pozostało skrzynek: {cases}</Text>
       </View>
-
       <View
         style={{
           width: screenWidth - 40,
@@ -78,8 +79,6 @@ export const PreRollView = memo(function PreRollView({
           intensity={7}
           tint="light"
           style={{
-            // borderWidth: 1,
-            // borderColor: "red",
             height: screenHeight / 4,
             overflow: "hidden",
             padding: 25,
@@ -260,7 +259,7 @@ export const PreRollView = memo(function PreRollView({
         </BlurView>
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={onOpen}>
+      <TouchableOpacity style={styles.button} onPress={test}>
         <Text style={styles.text}>Open</Text>
       </TouchableOpacity>
     </View>

@@ -1,13 +1,22 @@
-import { View, Text } from "react-native";
-import { useUserStore } from "@/store/hooks/useUserStore";
+import { View, Text, Button } from "react-native";
+import { userStore } from "@/features/user/store/userStore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ProgressBar } from "@ui-kitten/components";
 import { AppScrollView } from "@/components/layout/AppScrollView";
-import { AvatarWithLevel } from "@/features/userProfile/components/AvatarWithLevel";
+import { AvatarWithLevel } from "@/features/user/components/AvatarWithLevel";
+import { getPlayerXpNeeded } from "@/systems/progression/playerXp";
 
 const UserProfileScreen = () => {
-  const user = useUserStore((state) => state);
+  const userName = userStore((state) => state.name);
+  const pendingCases = userStore((state) => state.pendingCases);
+  const claimCases = userStore((state) => state.claimCases);
+
+  const level = userStore((state) => state.level);
+  const xp = userStore((state) => state.xp);
+
+  const xpNeeded = getPlayerXpNeeded(level);
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
       <AppScrollView>
@@ -25,11 +34,21 @@ const UserProfileScreen = () => {
             }}
           >
             <AvatarWithLevel />
-            <Text style={{ fontSize: 20, color: "lime" }}>@{user.name}</Text>
+            <Text style={{ fontSize: 20, color: "lime" }}>@{userName}</Text>
             <Text style={{ fontSize: 16, color: "orange" }}>
               dwdwokdw djwdd
             </Text>
+            {pendingCases > 0 && (
+              <View style={{ marginTop: 20, gap: 10 }}>
+                <Text style={{ color: "red" }}>
+                  🎁 Masz {pendingCases} skrzynek do odebrania
+                </Text>
+
+                <Button title="Odbierz nagrody" onPress={claimCases} />
+              </View>
+            )}
           </View>
+
           <View
             style={{
               flex: 1,
@@ -47,7 +66,15 @@ const UserProfileScreen = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Text style={{ color: "white", fontSize: 18 }}>effeeffe</Text>
+              {/* <Text style={{ color: "white", fontSize: 18 }}>effeeffe</Text> */}
+              <View>
+                <Text style={{ color: "lime", fontSize: 18 }}>
+                  TEST LEVEL: {level}
+                </Text>
+                <Text style={{ color: "lime", fontSize: 18 }}>
+                  XP: {xp} / {xpNeeded}
+                </Text>
+              </View>
               <View
                 style={{
                   width: 100,

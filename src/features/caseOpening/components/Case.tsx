@@ -14,9 +14,10 @@ import { BlurView } from "expo-blur";
 import Svg, { Defs, RadialGradient, Rect, Stop, Mask } from "react-native-svg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppScrollView } from "@/components/layout/AppScrollView";
+import { userStore } from "@/features/user/store/userStore";
 
 export const Case = () => {
-  const caseTestValue: number = 1;
+  const cases = userStore((state) => state.cases);
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
@@ -36,7 +37,7 @@ export const Case = () => {
                 size={22}
                 color="red"
               />
-              <Text style={{ color: "red" }}>Dostępne: {caseTestValue}</Text>
+              <Text style={{ color: "red" }}>Dostępne: 999</Text>
             </View>
           </View>
         </View>
@@ -100,10 +101,10 @@ export const Case = () => {
                   marginVertical: 14,
                 }}
               >
-                <Text style={{ color: "red" }}>x1</Text>
+                <Text style={{ color: "red" }}>x{cases}</Text>
                 <Button
                   title="Przejdź do skrzynki"
-                  disabled={caseTestValue === 0 ? true : false}
+                  disabled={cases === 0}
                   onPress={() => router.push("/caseSpin")}
                 />
               </View>

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { useCollectionStore } from "@/store/hooks/useCollectionStore";
-import type { CaseItem } from "@/features/caseOpening";
+import { collectionStore } from "../store/collectionStore";
+import { CaseItem } from "@/features/caseOpening";
 import type { FilterMode } from "../types";
 
 enum Filter {
@@ -10,7 +10,7 @@ enum Filter {
 }
 
 export const useCollectionFilters = (data: CaseItem[]) => {
-  const items = useCollectionStore((s) => s.items);
+  const items = collectionStore((state) => state.items);
   const [filterMode, setFilterMode] = useState<FilterMode>(Filter.ALL);
 
   const filteredData = useMemo(() => {

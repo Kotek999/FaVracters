@@ -1,10 +1,11 @@
-import { View, Text, Image, StyleSheet, Button } from "react-native";
-import type { ResultViewProps } from "../types";
+import { View, Text, Image, StyleSheet, Button, Alert } from "react-native";
 import { rarityColor } from "../consts";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { router } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Divider } from "@ui-kitten/components";
+import { userStore } from "@/features/user/store/userStore";
+import { ResultViewProps } from "../types";
 
 export const ResultView = ({
   winner,
@@ -13,6 +14,15 @@ export const ResultView = ({
   onBack,
 }: ResultViewProps) => {
   // const isLegendary = winner.rarity === "legendary";
+  const test = () => {
+    const canOpen = userStore.getState().useCase();
+
+    if (!canOpen) {
+      Alert.alert("Brak skrzynek!", "nie losujemy dalej...");
+      return;
+    }
+    onSpin();
+  };
 
   return (
     <View
@@ -222,7 +232,7 @@ export const ResultView = ({
         Current Pity +{Math.round(pityChance * 100)}%
       </Text>
       <View style={{ gap: 10 }}>
-        <Button title="Losuj dalej" onPress={onSpin} />
+        <Button title="Losuj dalej" onPress={test} />
         <Button
           title="Szczegóły"
           onPress={() => router.push(`/card/${winner.id}`)}

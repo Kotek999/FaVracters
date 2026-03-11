@@ -13,10 +13,12 @@ import { Card } from "./Card";
 import { ResultView } from "./ResultView";
 import { screenWidth } from "@/utils/dimensions";
 import { FULL_WIDTH, ITEM_WIDTH } from "../consts";
-import { useCollectionStore } from "@/store/hooks/useCollectionStore";
+import { collectionStore } from "@/features/collection/store/collectionStore";
 import { AppScrollView } from "@/components/layout/AppScrollView";
 import { SafeAreaView } from "react-native-safe-area-context";
-import type { CaseOpeningProps, CaseItem, Stage } from "../types";
+import { PLAYER_XP_FROM_CARD } from "@/systems/progression/playerXp";
+import { userStore } from "@/features/user/store/userStore";
+import { CaseOpeningProps, CaseItem, Stage } from "../types";
 
 export const CaseOpening = ({
   items,
@@ -43,9 +45,12 @@ export const CaseOpening = ({
     setStage("result");
     onWin?.(item);
 
-    const result = useCollectionStore
+    const result = collectionStore
       .getState()
       .addDuplicate(item.id, item.rarity);
+
+    const playerXp = PLAYER_XP_FROM_CARD[item.rarity];
+    userStore.getState().addXp(playerXp);
 
     if (result.isNew) {
       Alert.alert(
@@ -53,7 +58,10 @@ export const CaseOpening = ({
         `${item.name} dodana do kolekcji\nLevel ${result.currentLevel}`,
       );
     } else {
-      Alert.alert("Duplikat!", `+${result.xpGained} XP`);
+      Alert.alert(
+        "Duplikat!",
+        `+${result.xpGained} XP\n+${playerXp} player XP`,
+      );
     }
   };
 

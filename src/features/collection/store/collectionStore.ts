@@ -1,8 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { zustandStorage } from "../storage";
+import { zustandStorage } from "@/utils/storage";
 import { immer } from "zustand/middleware/immer";
-import { DUPLICATE_XP, getXpNeeded, MAX_LEVEL } from "../collection/xpSystem";
+import {
+  DUPLICATE_XP,
+  MAX_CARD_LEVEL,
+  getCardXpNeeded,
+} from "@/systems/progression/cardXp";
 import type {
   CollectionState,
   CollectionActions,
@@ -15,7 +19,7 @@ const initialState = (): Omit<CollectionState, CollectionActions> => ({
   items: {},
 });
 
-export const useCollectionStore = create<CollectionState>()(
+export const collectionStore = create<CollectionState>()(
   persist(
     immer((set, get) => ({
       items: {},
@@ -72,9 +76,9 @@ export const useCollectionStore = create<CollectionState>()(
           const card = s.items[id];
           if (!card) return;
 
-          if (card.level >= MAX_LEVEL) return;
+          if (card.level >= MAX_CARD_LEVEL) return;
 
-          const needed = getXpNeeded(rarity, card.level);
+          const needed = getCardXpNeeded(rarity, card.level);
 
           if (card.xp < needed) return;
 
@@ -88,7 +92,7 @@ export const useCollectionStore = create<CollectionState>()(
       },
 
       clearStorage: async () => {
-        await useCollectionStore.persist.clearStorage();
+        await collectionStore.persist.clearStorage();
         set(initialState());
       },
     })),
