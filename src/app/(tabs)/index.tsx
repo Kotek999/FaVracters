@@ -4,11 +4,18 @@ import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
-import { StyleSheet, ImageBackground, View } from "react-native";
+import { StyleSheet, ImageBackground, View, Alert } from "react-native";
 import { screenWidth, screenHeight } from "@/utils/dimensions";
 import { AppScrollView } from "@/components/layout/AppScrollView";
+import { useCountdown } from "@/systems/time/useCountdown";
+import { formatTime } from "@/systems/time/formatTime";
+import { useUserStore } from "@/features/user/store/useUserStore";
 
 export default function Home() {
+  const { dailyRewardAt, claimDailyReward } = useUserStore();
+
+  const { hours, minutes, seconds, isReady } = useCountdown(dailyRewardAt);
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
       <AppScrollView>
@@ -45,7 +52,22 @@ export default function Home() {
                     justifyContent: "space-between",
                   }}
                 >
-                  <Text style={{ color: "white" }}>Tekst coś</Text>
+                  <View>
+                    {!isReady ? (
+                      <>
+                        <Text style={{ color: "white" }}>Pozostało: </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={{ color: "white" }}>
+                            {formatTime(hours, minutes, seconds)}
+                          </Text>
+                        </View>
+                      </>
+                    ) : (
+                      <Text style={{ color: "lime" }}>
+                        Nagroda gotowa do odebrania
+                      </Text>
+                    )}
+                  </View>
                   <View
                     style={{
                       paddingHorizontal: 5,
@@ -131,16 +153,27 @@ export default function Home() {
                     Przykładowy dłuższy tekst, dwwdd dwjwdidwwdjwddwwddw.
                   </Text>
                 </View>
-                <View style={{ flexShrink: 1, maxWidth: "50%" }}>
+                <View
+                  style={{
+                    flexShrink: 1,
+                    maxWidth: "50%",
+                  }}
+                >
                   <Button
                     appearance="ghost"
                     status="info"
                     style={{
                       backgroundColor: "#0df2f2",
                     }}
-                    onPress={() => router.push("/case")}
+                    disabled={!isReady}
+                    onPress={() => {
+                      const reward = claimDailyReward();
+                      if (reward) {
+                        Alert.alert("Nagroda dzienna", "Otrzymano 1 skrzynkę!");
+                      }
+                    }}
                   >
-                    TEST
+                    Odbierz
                   </Button>
                 </View>
               </View>

@@ -39,6 +39,14 @@ export default function RootLayout() {
               animation: "simple_push",
             }}
           />
+          <Stack.Screen
+            name="loginCalendar"
+            options={{
+              headerShown: false,
+              presentation: "card",
+              animation: "simple_push",
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </ApplicationProvider>

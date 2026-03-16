@@ -69,9 +69,13 @@ export default function TabsLayout() {
                 borderColor: "#246969",
                 borderRadius: 10,
               }}
-              onPress={() => alert("bell icon clicked...")}
+              onPress={() => router.push("/loginCalendar")}
             >
-              <MaterialCommunityIcons name="bell" size={18} color="red" />
+              <MaterialCommunityIcons
+                name="calendar-check"
+                size={18}
+                color="red"
+              />
             </TouchableOpacity>
           ),
           tabBarLabel: ({ children, focused }) => (
