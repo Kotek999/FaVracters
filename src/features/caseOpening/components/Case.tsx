@@ -14,10 +14,10 @@ import { BlurView } from "expo-blur";
 import Svg, { Defs, RadialGradient, Rect, Stop, Mask } from "react-native-svg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppScrollView } from "@/components/layout/AppScrollView";
-import { userStore } from "@/features/user/store/userStore";
+import { useUserStore } from "@/features/user/store/useUserStore";
 
 export const Case = () => {
-  const cases = userStore((state) => state.cases);
+  const { cases } = useUserStore();
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>

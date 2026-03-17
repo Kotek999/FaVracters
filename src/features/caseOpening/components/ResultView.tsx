@@ -4,7 +4,7 @@ import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { router } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Divider } from "@ui-kitten/components";
-import { userStore } from "@/features/user/store/userStore";
+import { useUserStore } from "@/features/user/store/useUserStore";
 import { ResultViewProps } from "../types";
 
 export const ResultView = ({
@@ -13,9 +13,10 @@ export const ResultView = ({
   onSpin,
   onBack,
 }: ResultViewProps) => {
-  // const isLegendary = winner.rarity === "legendary";
+  const { useCase } = useUserStore();
+
   const test = () => {
-    const canOpen = userStore.getState().useCase();
+    const canOpen = useCase();
 
     if (!canOpen) {
       Alert.alert("Brak skrzynek!", "nie losujemy dalej...");

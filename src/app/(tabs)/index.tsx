@@ -1,4 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { memo } from "react";
 import { Layout, Text, Button } from "@ui-kitten/components";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,9 +11,37 @@ import { AppScrollView } from "@/components/layout/AppScrollView";
 import { useCountdown } from "@/systems/time/useCountdown";
 import { formatTime } from "@/systems/time/formatTime";
 import { useUserStore } from "@/features/user/store/useUserStore";
+import { timeAgo } from "@/systems/time/timeAgo";
+import { Activity } from "@/features/user/types";
+
+const ActivityItem = memo(({ activity }: { activity: Activity }) => {
+  const ago = timeAgo(activity.createdAt);
+
+  if (activity.type === "HERO_UNLOCK") {
+    return (
+      <Text style={{ color: "lime" }}>
+        🔥 Znalazłeś {activity.rarity.toUpperCase()} Hero!
+        {"\n"}
+        {activity.heroName} dodany do kolekcji • {ago}
+      </Text>
+    );
+  }
+
+  if (activity.type === "LEVEL_UP") {
+    return (
+      <Text style={{ color: "lime" }}>
+        🆙 Nowy poziom: {activity.level}
+        {"\n"}
+        {activity.reward ?? ""} • {ago}
+      </Text>
+    );
+  }
+
+  return null;
+});
 
 export default function Home() {
-  const { dailyRewardAt, claimDailyReward } = useUserStore();
+  const { dailyRewardAt, activities, claimDailyReward } = useUserStore();
 
   const { hours, minutes, seconds, isReady } = useCountdown(dailyRewardAt);
 
@@ -236,6 +265,12 @@ export default function Home() {
         <Layout>
           <Text style={{ color: "black" }}>Jakiś kolejny napis</Text>
         </Layout>
+
+        <View>
+          {activities.map((activity, index) => (
+            <ActivityItem key={index} activity={activity} />
+          ))}
+        </View>
         <View
           style={{
             top: 20,

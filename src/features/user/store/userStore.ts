@@ -9,32 +9,8 @@ import {
 import { getRewardCases } from "@/systems/progression/playerRewards";
 import { Alert } from "react-native";
 import { LOGIN_DAYS, LOGIN_REWARDS } from "@/systems/progression/loginRewards";
-import { Rarity } from "@/features/caseOpening";
 import { Time } from "@/systems/time/consts";
-
-export type LoginReward = { cases: number } | { rarity: Rarity };
-
-export interface UserState {
-  id: string;
-  name: string;
-  level: number;
-  xp: number;
-  cases: number;
-  pendingCases: number;
-  setName: (newName: string) => void;
-  addXp: (amount: number) => void;
-  claimCases: () => void;
-  useCase: () => boolean;
-  dailyRewardAt: number;
-  claimDailyReward: () => boolean;
-  loginStreakDay: number;
-  lastLoginAt: number;
-  loginRewardAvailable: boolean;
-  checkLoginStreak: () => boolean;
-  claimLoginStreakReward: () => LoginReward | null;
-  resetUser: () => void;
-  clearStorage: () => Promise<void>;
-}
+import { UserState } from "../types";
 
 const STORAGE_KEY = "user-storage";
 
@@ -51,6 +27,7 @@ const createInitialUser = () => ({
   loginStreakDay: 0,
   lastLoginAt: 0,
   loginRewardAvailable: false,
+  activities: [],
 });
 
 export const userStore = create<UserState>()(
@@ -64,7 +41,7 @@ export const userStore = create<UserState>()(
           name: newName,
         }),
       addXp: (amount) => {
-        const { level, xp, pendingCases } = get();
+        const { level, xp, pendingCases, addActivity } = get();
 
         if (level >= MAX_PLAYER_LEVEL) return;
 
@@ -92,6 +69,13 @@ export const userStore = create<UserState>()(
         });
 
         if (newLevel > level) {
+          addActivity({
+            type: "LEVEL_UP",
+            level: newLevel,
+            reward: `+${reward} skrzynka`,
+            createdAt: Date.now(),
+          });
+
           Alert.alert(
             "Level Up!",
             `Osiągnąłeś poziom ${newLevel}${
@@ -189,6 +173,17 @@ export const userStore = create<UserState>()(
         }));
         return true;
       },
+
+      addActivity: (activity) =>
+        set((state) => {
+          const next = state.activities;
+
+          next.unshift(activity);
+          if (next.length > 3) next.pop();
+
+          return { activities: next };
+        }),
+
       resetUser: () => set(createInitialUser()),
       clearStorage: async () => {
         await userStore.persist.clearStorage();
@@ -208,6 +203,7 @@ export const userStore = create<UserState>()(
         dailyRewardAt: state.dailyRewardAt,
         loginStreakDay: state.loginStreakDay,
         lastLoginAt: state.lastLoginAt,
+        activities: state.activities,
       }),
     },
   ),

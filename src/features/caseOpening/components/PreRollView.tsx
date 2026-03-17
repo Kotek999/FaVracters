@@ -13,7 +13,7 @@ import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { BlurView } from "expo-blur";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { userStore } from "@/features/user/store/userStore";
+import { useUserStore } from "@/features/user/store/useUserStore";
 import { PreRollViewProps } from "../types";
 
 export const PreRollView = memo(function PreRollView({
@@ -31,10 +31,10 @@ export const PreRollView = memo(function PreRollView({
     { key: "br", style: styleBR, tx: -BOX_SIZE / 2, ty: -BOX_SIZE / 2 },
   ] as const;
 
-  const cases = userStore((state) => state.cases);
+  const { cases, useCase } = useUserStore();
 
   const test = () => {
-    const canOpen = userStore.getState().useCase();
+    const canOpen = useCase();
 
     if (!canOpen) {
       Alert.alert("Brak skrzynek!");

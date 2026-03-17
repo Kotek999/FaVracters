@@ -1,11 +1,11 @@
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import React, { memo, useEffect } from "react";
-import { LoginReward } from "@/features/user/store/userStore";
 import { LOGIN_REWARDS } from "@/systems/progression/loginRewards";
 import { useCountdown } from "@/systems/time/useCountdown";
 import { formatTime } from "@/systems/time/formatTime";
 import { Time } from "@/systems/time/consts";
 import { useUserStore } from "@/features/user/store/useUserStore";
+import { LoginReward } from "@/features/user/types";
 
 interface RewardDayProps {
   day: number;

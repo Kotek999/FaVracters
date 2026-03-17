@@ -45,6 +45,13 @@ export const CaseOpening = ({
     setStage("result");
     onWin?.(item);
 
+    userStore.getState().addActivity({
+      type: "HERO_UNLOCK",
+      heroName: item.name,
+      rarity: item.rarity,
+      createdAt: Date.now(),
+    });
+
     const result = collectionStore
       .getState()
       .addDuplicate(item.id, item.rarity);

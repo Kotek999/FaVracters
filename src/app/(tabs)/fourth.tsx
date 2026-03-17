@@ -1,19 +1,14 @@
 import { View, Text, Button } from "react-native";
-import { userStore } from "@/features/user/store/userStore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ProgressBar } from "@ui-kitten/components";
 import { AppScrollView } from "@/components/layout/AppScrollView";
 import { AvatarWithLevel } from "@/features/user/components/AvatarWithLevel";
 import { getPlayerXpNeeded } from "@/systems/progression/playerXp";
+import { useUserStore } from "@/features/user/store/useUserStore";
 
 const UserProfileScreen = () => {
-  const userName = userStore((state) => state.name);
-  const pendingCases = userStore((state) => state.pendingCases);
-  const claimCases = userStore((state) => state.claimCases);
-
-  const level = userStore((state) => state.level);
-  const xp = userStore((state) => state.xp);
+  const { userName, pendingCases, claimCases, level, xp } = useUserStore();
 
   const xpNeeded = getPlayerXpNeeded(level);
 
