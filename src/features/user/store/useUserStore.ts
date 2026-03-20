@@ -11,12 +11,14 @@ export const useUserStore = () => {
   const level = userStore((state) => state.level);
   const xp = userStore((state) => state.xp);
   const activities = userStore((state) => state.activities);
+  const energy = userStore((state) => state.energy);
 
   const claimDailyReward = userStore((state) => state.claimDailyReward);
   const claimLoginReward = userStore((state) => state.claimLoginStreakReward);
   const claimCases = userStore((state) => state.claimCases);
   const checkLogin = userStore((state) => state.checkLoginStreak);
   const useCase = userStore((state) => state.useCase);
+  const spendEnergy = userStore((state) => state.spendEnergy);
 
   const clearUserStorage = userStore((state) => state.clearStorage);
 
@@ -31,11 +33,13 @@ export const useUserStore = () => {
     level,
     xp,
     activities,
+    energy,
     claimDailyReward,
     claimLoginReward,
     claimCases,
     checkLogin,
     useCase,
+    spendEnergy,
     clearUserStorage,
   };
 };

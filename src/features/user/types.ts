@@ -12,9 +12,18 @@ export type Activity =
       level: number;
       reward?: string;
       createdAt: number;
+    }
+  | {
+      type: "REWARD_CLAIM";
+      energy: number;
+      createdAt: number;
     };
 
-export type LoginReward = { cases: number } | { rarity: Rarity };
+export type LoginReward =
+  | { day: number }
+  | { cases: number }
+  | { energy: number }
+  | { rarity: Rarity };
 
 export interface UserState {
   id: string;
@@ -37,5 +46,8 @@ export interface UserState {
   resetUser: () => void;
   activities: Activity[];
   addActivity: (activity: Activity) => void;
+  energy: number;
+  addEnergy: (amount: number) => void;
+  spendEnergy: (amount: number) => boolean;
   clearStorage: () => Promise<void>;
 }

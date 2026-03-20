@@ -37,6 +37,16 @@ const ActivityItem = memo(({ activity }: { activity: Activity }) => {
     );
   }
 
+  if (activity.type === "REWARD_CLAIM") {
+    return (
+      <Text style={{ color: "lime" }}>
+        Nagroda odebrana
+        {"\n"}
+        {activity.energy ?? ""} energii • {ago}
+      </Text>
+    );
+  }
+
   return null;
 });
 
@@ -198,7 +208,10 @@ export default function Home() {
                     onPress={() => {
                       const reward = claimDailyReward();
                       if (reward) {
-                        Alert.alert("Nagroda dzienna", "Otrzymano 1 skrzynkę!");
+                        Alert.alert(
+                          "Nagroda dzienna",
+                          "Otrzymano 1 skrzynkę i 10 energii!",
+                        );
                       }
                     }}
                   >

@@ -1,8 +1,9 @@
-import { View, Text, Button, Image, StyleSheet } from "react-native";
+import { View, Text, Button, Image, StyleSheet, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppScrollView } from "@/components/layout/AppScrollView";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { useUserStore } from "@/features/user/store/useUserStore";
 
 const HORIZONTAL_PADDING: number = 8;
 const CARD_ITEM_MARGIN: number = 8;
@@ -10,6 +11,16 @@ const CARD_ITEM_WIDTH =
   (screenWidth - HORIZONTAL_PADDING * 2 - CARD_ITEM_MARGIN * 4) / 1.7;
 
 export default function Shop() {
+  const { energy, spendEnergy } = useUserStore();
+
+  const buyCase = () => {
+    const success = spendEnergy(25);
+
+    if (!success) {
+      Alert.alert("Brak energii", "Koszt skrzynki to 25 energii");
+      return;
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top", "bottom"]}>
       <AppScrollView>
@@ -21,6 +32,9 @@ export default function Shop() {
         >
           <View style={{ alignItems: "center", marginVertical: 20 }}>
             <Text style={{ color: "lime", fontSize: 20 }}>Sklep</Text>
+            <Text style={{ color: "pink", fontSize: 20 }}>
+              Twoja energia: {energy}
+            </Text>
           </View>
 
           <View
@@ -171,7 +185,7 @@ export default function Shop() {
                     9dwokd jdijw djiwijdwij
                   </Text>
                   <View style={{ marginTop: 10 }}>
-                    <Button title="jduujwd - $999,00" />
+                    <Button title="jduujwd - $999,00" onPress={buyCase} />
                   </View>
                 </View>
 

@@ -22,6 +22,7 @@ const createInitialUser = () => ({
   level: 1,
   xp: 0,
   cases: 0,
+  energy: 0,
   pendingCases: 0,
   dailyRewardAt: Date.now(),
   loginStreakDay: 0,
@@ -41,7 +42,7 @@ export const userStore = create<UserState>()(
           name: newName,
         }),
       addXp: (amount) => {
-        const { level, xp, pendingCases, addActivity } = get();
+        const { level, xp, pendingCases, addActivity, addEnergy } = get();
 
         if (level >= MAX_PLAYER_LEVEL) return;
 
@@ -75,6 +76,8 @@ export const userStore = create<UserState>()(
             reward: `+${reward} skrzynka`,
             createdAt: Date.now(),
           });
+
+          addEnergy(level * 5);
 
           Alert.alert(
             "Level Up!",
@@ -128,7 +131,12 @@ export const userStore = create<UserState>()(
         return false;
       },
       claimLoginStreakReward: () => {
-        const { loginStreakDay, lastLoginAt, loginRewardAvailable } = get();
+        const {
+          loginStreakDay,
+          lastLoginAt,
+          loginRewardAvailable,
+          addActivity,
+        } = get();
 
         if (!loginRewardAvailable) return null;
 
@@ -155,25 +163,44 @@ export const userStore = create<UserState>()(
         });
 
         if ("cases" in reward) {
-          userStore.setState((s) => ({
-            cases: s.cases + reward.cases,
+          userStore.setState((state) => ({
+            cases: state.cases + reward.cases,
           }));
+        }
+
+        if ("energy" in reward) {
+          set((state) => ({
+            energy: state.energy + reward.energy,
+          }));
+
+          addActivity({
+            type: "REWARD_CLAIM",
+            energy: reward.energy,
+            createdAt: Date.now(),
+          });
         }
         return reward;
       },
       claimDailyReward: () => {
-        const { dailyRewardAt } = get();
+        const { dailyRewardAt, addEnergy, addActivity } = get();
         const now = Date.now();
 
         if (now < dailyRewardAt) return false;
 
-        set((state) => ({
-          cases: state.cases + 1,
-          dailyRewardAt: now + Time.DAY,
-        }));
+        (addEnergy(10),
+          set((state) => ({
+            energy: state.energy,
+            cases: state.cases + 1,
+            dailyRewardAt: now + Time.DAY,
+          })));
+
+        addActivity({
+          type: "REWARD_CLAIM",
+          energy: 10,
+          createdAt: Date.now(),
+        });
         return true;
       },
-
       addActivity: (activity) =>
         set((state) => {
           const next = state.activities;
@@ -183,7 +210,23 @@ export const userStore = create<UserState>()(
 
           return { activities: next };
         }),
+      addEnergy: (amount) =>
+        set((state) => ({
+          energy: state.energy + amount,
+        })),
 
+      spendEnergy: (amount) => {
+        const { energy, cases } = get();
+
+        if (energy < amount) return false;
+
+        set({
+          cases: cases + 1,
+          energy: energy - amount,
+        });
+
+        return true;
+      },
       resetUser: () => set(createInitialUser()),
       clearStorage: async () => {
         await userStore.persist.clearStorage();
@@ -204,6 +247,7 @@ export const userStore = create<UserState>()(
         loginStreakDay: state.loginStreakDay,
         lastLoginAt: state.lastLoginAt,
         activities: state.activities,
+        energy: state.energy,
       }),
     },
   ),
