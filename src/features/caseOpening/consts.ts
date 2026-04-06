@@ -1,3 +1,5 @@
+import { colors } from "@/theme/colors";
+
 export const ITEM_WIDTH: number = 110;
 export const ITEM_HEIGHT: number = 120;
 export const ITEM_SPACING: number = 10;
@@ -13,8 +15,8 @@ export const BASE_LEGENDARY_CHANCE: number = 0.01;
 export const MAX_BOOST: number = 0.4;
 
 export const rarityColor = {
-  common: "#777",
-  rare: "#3b82f6",
-  epic: "#a855f7",
-  legendary: "#f59e0b",
+  common: colors.common,
+  rare: colors.rare,
+  epic: colors.epic,
+  legendary: colors.legendary,
 };
