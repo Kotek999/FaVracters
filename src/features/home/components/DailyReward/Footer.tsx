@@ -1,20 +1,32 @@
 import { Text } from "@ui-kitten/components";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { colors } from "@/theme/colors";
+import { fonts } from "@/theme/fonts";
 import { Button } from "@/components/ui/Button/Button";
+import { toast } from "@/components/ui/Toast/ToastService";
 import { FooterProps } from "../../types";
 
 export const Footer = ({ claimDailyReward, isReady }: FooterProps) => {
+  const showToastRewardMessage = () =>
+    toast.custom({
+      type: "info",
+      payload: {
+        title: "Dzienna nagroda",
+        message: "Otrzymano 1 skrzynkę i 10 energii!",
+        duration: 3500,
+      },
+    });
+
   const onPressClaimDailyReward = () => {
     const reward = claimDailyReward();
     if (reward) {
-      Alert.alert("Nagroda dzienna", "Otrzymano 1 skrzynkę i 10 energii!");
+      showToastRewardMessage();
     }
   };
 
   const rewardReadyText: string = !isReady
-    ? "Odebrałeś swój codzienny pakiet, wróć kolejnego dnia."
-    : "Odbierz swój codzienny pakiet skrzynki i energii.";
+    ? "Odebrałeś swój dzienny pakiet, wróć kolejnego dnia."
+    : "Odbierz swój dzienny pakiet skrzynki i energii.";
 
   return (
     <View style={styles.mainContainer}>
@@ -49,6 +61,8 @@ const styles = StyleSheet.create({
   },
   rewardReadyText: {
     color: colors.textGray,
+    fontSize: 14,
+    fontFamily: fonts.semibold,
   },
   buttonText: {
     color: colors.textDark,

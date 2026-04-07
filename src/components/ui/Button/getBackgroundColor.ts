@@ -13,6 +13,6 @@ export const getBackgroundColor = (
     case "secondary":
       return colors.backgroundDark;
     case "outline":
-      return "transparent";
+      return colors.blank;
   }
 };

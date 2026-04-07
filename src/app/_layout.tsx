@@ -1,9 +1,11 @@
 import * as eva from "@eva-design/eva";
+import Toast from "react-native-toast-message";
 import { Stack } from "expo-router";
 import { useAppFonts } from "@/hooks/useAppFonts";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ApplicationProvider } from "@ui-kitten/components";
+import { config } from "@/components/ui/Toast/config";
 
 export default function RootLayout() {
   const fontsLoaded = useAppFonts();
@@ -48,6 +50,7 @@ export default function RootLayout() {
             }}
           />
         </Stack>
+        <Toast config={config} />
       </SafeAreaProvider>
     </ApplicationProvider>
   );

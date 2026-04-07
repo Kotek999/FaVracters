@@ -11,6 +11,8 @@ export const colors = {
   backgroundDark: "#102222",
   backgroundDarkGreen: "#166161",
   backgroundBrown: "#ff91002d",
+  backgroundLightGreen: "#22c55e",
+  backgroundRed: "#ef4444",
   backgroundBlur: "#073131",
   opacityDark: "rgba(0,0,0,0.8)",
   common: "#a0a0a0",
