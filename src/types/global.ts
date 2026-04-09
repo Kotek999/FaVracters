@@ -1,3 +1,5 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ComponentProps, ReactNode } from "react";
 import {
   ColorValue,
   ImageSourcePropType,
@@ -5,7 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 
-type Children = React.ReactNode;
+export type Children = ReactNode;
 
 export interface ImageWithGradientProps {
   children: Children;
@@ -14,3 +16,6 @@ export interface ImageWithGradientProps {
   gradientStyle?: StyleProp<ViewStyle>;
   gradientColors: readonly [ColorValue, ColorValue, ...ColorValue[]];
 }
+
+export type IconName = ComponentProps<typeof MaterialCommunityIcons>["name"];
+export type HeaderRenderer = () => Children;

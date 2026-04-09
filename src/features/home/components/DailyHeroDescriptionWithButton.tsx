@@ -7,6 +7,7 @@ import { rarityColor } from "@/features/caseOpening/consts";
 import { Button } from "@/components/ui/Button/Button";
 import { dailyHeroItem } from "../utils/dailyHeroItem";
 import { DailyHeroDescriptionWithButtonProps } from "../types";
+import { IconName } from "@/types/global";
 
 export const DailyHeroDescriptionWithButton = ({
   dailyHeroConfig,
@@ -25,7 +26,7 @@ export const DailyHeroDescriptionWithButton = ({
         textStyle={styles.buttonText}
         icon={
           <MaterialCommunityIcons
-            name={dailyHeroConfig.icon as any}
+            name={dailyHeroConfig.icon as IconName}
             size={24}
             color={colors.black}
           />
