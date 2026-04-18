@@ -12,7 +12,10 @@ export const useUserStore = () => {
   const xp = userStore((state) => state.xp);
   const activities = userStore((state) => state.activities);
   const energy = userStore((state) => state.energy);
+  const dailyEpicReward = userStore((state) => state.dailyEpicReward);
 
+  const rollDailyEpicReward = userStore((state) => state.rollDailyEpic);
+  const clearDailyEpicReward = userStore((state) => state.clearDailyEpic);
   const claimDailyReward = userStore((state) => state.claimDailyReward);
   const claimLoginReward = userStore((state) => state.claimLoginStreakReward);
   const claimCases = userStore((state) => state.claimCases);
@@ -34,6 +37,9 @@ export const useUserStore = () => {
     xp,
     activities,
     energy,
+    dailyEpicReward,
+    rollDailyEpicReward,
+    clearDailyEpicReward,
     claimDailyReward,
     claimLoginReward,
     claimCases,

@@ -36,6 +36,7 @@ export const screens = [
             color={colors.primary}
           />
         }
+        showBadge
       />
     ),
   },

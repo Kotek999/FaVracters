@@ -8,6 +8,7 @@ import {
 } from "@/systems/progression/playerXp";
 import { getRewardCases } from "@/systems/progression/playerRewards";
 import { Alert } from "react-native";
+import { getRandomEpicReward } from "../utils/getRandomEpicReward";
 import { LOGIN_DAYS, LOGIN_REWARDS } from "@/systems/progression/loginRewards";
 import { Time } from "@/systems/time/consts";
 import { UserState } from "../types";
@@ -130,6 +131,21 @@ export const userStore = create<UserState>()(
         }
         return false;
       },
+      dailyEpicReward: null,
+      rollDailyEpic: () => {
+        const { dailyEpicReward } = get();
+
+        if (dailyEpicReward) return;
+
+        const hero = getRandomEpicReward();
+
+        set({
+          dailyEpicReward: hero.id,
+        });
+      },
+      clearDailyEpic: () => {
+        set({ dailyEpicReward: null });
+      },
       claimLoginStreakReward: () => {
         const {
           loginStreakDay,
@@ -246,6 +262,7 @@ export const userStore = create<UserState>()(
         dailyRewardAt: state.dailyRewardAt,
         loginStreakDay: state.loginStreakDay,
         lastLoginAt: state.lastLoginAt,
+        dailyEpicReward: state.dailyEpicReward,
         activities: state.activities,
         energy: state.energy,
       }),

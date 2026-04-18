@@ -11,7 +11,7 @@ export const getBackgroundColor = (
     case "primary":
       return colors.primary;
     case "secondary":
-      return colors.backgroundDark;
+      return colors.secondary;
     case "outline":
       return colors.blank;
   }

@@ -1,3 +1,5 @@
+import { characters } from "@/data/characters";
+
 export const LOGIN_REWARDS = [
   { day: 1, cases: 1, energy: 5 },
   { day: 2, cases: 1, energy: 5 },
@@ -9,3 +11,6 @@ export const LOGIN_REWARDS = [
 ] as const;
 
 export const LOGIN_DAYS: number = LOGIN_REWARDS.length;
+export const EPIC_POOL = characters.filter(
+  (character) => character.rarity === "epic",
+);

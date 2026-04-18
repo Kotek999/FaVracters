@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from "react-native";
+import { ColorValue, TextStyle, ViewStyle } from "react-native";
 import { BaseToastProps } from "react-native-toast-message";
 
 export type Variant = "primary" | "secondary" | "outline";
@@ -38,3 +38,9 @@ export interface ToastOptions<T extends ToastType = ToastType> {
 export type ToastProps = BaseToastProps & {
   variant: ToastType;
 };
+
+export interface ProgressBarProps {
+  progress: number;
+  height?: number;
+  colors: readonly [ColorValue, ColorValue, ...ColorValue[]];
+}

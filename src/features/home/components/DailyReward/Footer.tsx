@@ -3,24 +3,17 @@ import { StyleSheet, View } from "react-native";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { Button } from "@/components/ui/Button/Button";
-import { toast } from "@/components/ui/Toast/ToastService";
+import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
 import { FooterProps } from "../../types";
 
 export const Footer = ({ claimDailyReward, isReady }: FooterProps) => {
-  const showToastRewardMessage = () =>
-    toast.custom({
-      type: "info",
-      payload: {
-        title: "Dzienna nagroda",
-        message: "Otrzymano 1 skrzynkę i 10 energii!",
-        duration: 3500,
-      },
-    });
-
   const onPressClaimDailyReward = () => {
     const reward = claimDailyReward();
     if (reward) {
-      showToastRewardMessage();
+      showToastMessageInfo(
+        "Dzienna nagroda",
+        "Otrzymano 1 skrzynkę i 10 energii!",
+      );
     }
   };
 
@@ -35,7 +28,7 @@ export const Footer = ({ claimDailyReward, isReady }: FooterProps) => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title="Odbierz"
+          title={isReady ? "Odbierz" : "Wkrótce"}
           variant="primary"
           disabled={!isReady}
           textStyle={styles.buttonText}

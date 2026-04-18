@@ -40,6 +40,7 @@ export interface HeaderIconButtonProps {
   icon: Children;
   onPress: () => void;
   style?: ViewStyle;
+  showBadge?: boolean;
 }
 
 export type FocusedProp = {

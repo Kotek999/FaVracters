@@ -26,6 +26,10 @@ export const Button = ({
     </View>
   ) : null;
 
+  const disabledStyle = [
+    disabled ? { ...styles.shadow, shadowColor: colors.shadow } : styles.shadow,
+  ];
+
   return (
     <Pressable
       onPress={onPress}
@@ -38,6 +42,7 @@ export const Button = ({
           borderWidth: variant === "outline" ? 1 : 0,
           borderColor: colors.primary,
         },
+        disabledStyle,
         style,
       ]}
     >
@@ -63,6 +68,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
+  },
+  shadow: {
     shadowColor: colors.primary,
     shadowOpacity: 0.4,
     shadowRadius: 12,

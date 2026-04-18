@@ -8,13 +8,15 @@ import { TimerProps } from "../../types";
 export const Timer = ({ hours, minutes, seconds }: TimerProps) => {
   const boxes = getTimerValues({ hours, minutes, seconds });
 
+  const format = (n: number) => n.toString().padStart(2, "0");
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
         {boxes.map((item, index) => {
           return (
             <View key={index} style={styles.boxContainer}>
-              <Text style={styles.valueText}>{item.value}</Text>
+              <Text style={styles.valueText}>{format(item.value)}</Text>
               <Text style={styles.titleText}>{item.title}</Text>
             </View>
           );
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
     width: "100%",
     color: colors.primary,
     fontFamily: fonts.semibold,
+    fontVariant: ["tabular-nums"],
     letterSpacing: 0.5,
     fontSize: 18,
   },

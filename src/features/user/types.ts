@@ -43,6 +43,9 @@ export interface UserState {
   loginRewardAvailable: boolean;
   checkLoginStreak: () => boolean;
   claimLoginStreakReward: () => LoginReward | null;
+  dailyEpicReward: string | null;
+  rollDailyEpic: () => void;
+  clearDailyEpic: () => void;
   resetUser: () => void;
   activities: Activity[];
   addActivity: (activity: Activity) => void;
