@@ -68,6 +68,8 @@ export interface AddItemResult {
 
 export interface CollectionState {
   items: Record<string, CardProgress>;
+  ownedCardsCount: number;
+  highestCardRarity: Rarity | null;
   addDuplicate: Action<AddDuplicateResult>;
   levelUp: Action<void>;
   clear: () => void;

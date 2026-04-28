@@ -16,7 +16,7 @@ export const screens = [
     iconName: "home-variant",
 
     headerLeft: () => (
-      <TouchableOpacity onPress={() => navigate("/fourth")}>
+      <TouchableOpacity onPress={() => navigate("/userProfile")}>
         <Avatar
           borderRadius={20}
           style={{ borderWidth: 1, borderColor: colors.borderPrimary }}
@@ -102,7 +102,7 @@ export const screens = [
   },
 
   {
-    name: "fourth",
+    name: "userProfile",
     title: "Profil",
     iconName: "account-circle",
 

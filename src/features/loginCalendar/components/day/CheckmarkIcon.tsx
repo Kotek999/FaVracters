@@ -10,7 +10,7 @@ export const CheckmarkIcon = ({ isClaimed }: { isClaimed: boolean }) => {
       {isClaimed && (
         <View style={styles.checkWrapper}>
           <LinearGradient
-            colors={[colors.textLightLime, colors.backgroundLightGreen]}
+            colors={[colors.textLightLime, colors.backgroundLime]}
             style={styles.checkContainer}
           >
             <Ionicons name="checkmark" size={20} color={colors.white} />

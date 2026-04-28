@@ -1,4 +1,6 @@
+import { StyleProp, TextStyle } from "react-native";
 import { Rarity } from "../caseOpening";
+import { IconName } from "@/types/global";
 
 export type Activity =
   | {
@@ -54,3 +56,68 @@ export interface UserState {
   spendEnergy: (amount: number) => boolean;
   clearStorage: () => Promise<void>;
 }
+
+export interface ProgressLinesProps {
+  total: number;
+  current: number;
+}
+
+export interface CardStatsProps {
+  icon: IconName;
+  value: React.ReactNode;
+  label: string;
+  fullWidth?: boolean;
+}
+
+type NullableCardRarity = Rarity | null;
+
+export interface CollectionProps {
+  stats: CardStatsProps[];
+  highestCardRarity: NullableCardRarity;
+}
+
+export interface ItemProps extends CollectionProps {
+  loginStreakDay: number;
+}
+
+export interface LoginStreakStatsProps {
+  loginStreakDay: number;
+}
+
+export interface ProgressProps {
+  level: number;
+  progress: number;
+}
+
+export interface AvatarItemProps extends ProgressProps {
+  userName: string;
+}
+
+export interface LevelProgressProps {
+  level: number;
+  xp: number;
+  xpNeeded: number;
+}
+
+export interface PendingCasesProps {
+  pendingCases: number;
+  claimCases: () => void;
+}
+
+export interface StatsDataProps {
+  ownedCardsCount: number;
+  style: StyleProp<TextStyle>;
+  energy: number;
+}
+
+export type Stats =
+  | {
+      icon: IconName;
+      value: React.JSX.Element;
+      label: string;
+    }
+  | {
+      icon: IconName;
+      value: string;
+      label: string;
+    };

@@ -7,6 +7,7 @@ import {
   MAX_CARD_LEVEL,
   getCardXpNeeded,
 } from "@/systems/progression/cardXp";
+import { RARITY_ORDER } from "@/systems/progression/card";
 import type {
   CollectionState,
   CollectionActions,
@@ -15,19 +16,25 @@ import type {
 
 const STORAGE_KEY = "collection-storage";
 
-const initialState = (): Omit<CollectionState, CollectionActions> => ({
+const state = {
   items: {},
+  ownedCardsCount: 0,
+  highestCardRarity: null,
+};
+
+const initialState = (): Omit<CollectionState, CollectionActions> => ({
+  ...state,
 });
 
 export const collectionStore = create<CollectionState>()(
   persist(
     immer((set, get) => ({
-      items: {},
-
+      ...state,
       addDuplicate: (id, rarity) => {
         const state = get();
         const current = state.items[id];
         const xpGain = DUPLICATE_XP[rarity];
+        const currentCardRarity = state.highestCardRarity;
 
         if (!current) {
           const newCard: CardProgress = {
@@ -36,6 +43,15 @@ export const collectionStore = create<CollectionState>()(
             copies: 1,
             rarity,
           };
+
+          state.ownedCardsCount += 1;
+
+          if (
+            !currentCardRarity ||
+            RARITY_ORDER[rarity] > RARITY_ORDER[currentCardRarity]
+          ) {
+            set({ highestCardRarity: rarity });
+          }
 
           set({
             items: {
@@ -102,6 +118,8 @@ export const collectionStore = create<CollectionState>()(
 
       partialize: (state) => ({
         items: state.items,
+        ownedCardsCount: state.ownedCardsCount,
+        highestCardRarity: state.highestCardRarity,
       }),
     },
   ),
