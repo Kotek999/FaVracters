@@ -38,10 +38,23 @@ export const userStore = create<UserState>()(
       ...createInitialUser(),
       level: 1,
       xp: 0,
-      setName: (newName) =>
+      language: "pl",
+      // setName: (newName) =>
+      //   set({
+      //     name: newName,
+      //   }),
+      setName: (name) => {
+        const trimmed = name.trim();
+
+        if (!trimmed) return;
+
         set({
-          name: newName,
-        }),
+          name: trimmed.slice(0, 16),
+        });
+      },
+      setLanguage: (lang) => {
+        set({ language: lang });
+      },
       addXp: (amount) => {
         const { level, xp, pendingCases, addActivity, addEnergy } = get();
 
@@ -255,6 +268,7 @@ export const userStore = create<UserState>()(
       partialize: (state) => ({
         id: state.id,
         name: state.name,
+        language: state.language,
         level: state.level,
         xp: state.xp,
         cases: state.cases,

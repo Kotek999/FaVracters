@@ -49,6 +49,14 @@ export default function RootLayout() {
               animation: "simple_push",
             }}
           />
+          <Stack.Screen
+            name="settings"
+            options={{
+              headerShown: false,
+              presentation: "card",
+              animation: "simple_push",
+            }}
+          />
         </Stack>
         <Toast config={config} />
       </SafeAreaProvider>

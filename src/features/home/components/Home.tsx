@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { useUserStore } from "@/features/user/store/useUserStore";
 import { SafeAreaWithScrollView } from "@/components/layout/SafeAreaWithScrollView";
-import { Item as DailyReward } from "./DailyReward/Item";
+import { Item as DailyReward } from "./dailyReward/Item";
 import { DailyHero } from "./DailyHero";
-import { Items as Activities } from "./Activity/Items";
+import { Items as Activities } from "./activity/Items";
 import { Text } from "@ui-kitten/components";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";

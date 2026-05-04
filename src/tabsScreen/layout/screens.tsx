@@ -121,7 +121,7 @@ export const screens = [
 
     headerRight: () => (
       <HeaderIconButton
-        onPress={() => alert("cog icon clicked...")}
+        onPress={() => navigate("/settings")}
         icon={
           <MaterialCommunityIcons name="cog" size={18} color={colors.primary} />
         }

@@ -26,7 +26,8 @@ export type RoutePath =
   | "/second"
   | "/case"
   | "/userProfile"
-  | "/loginCalendar";
+  | "/loginCalendar"
+  | "/settings";
 
 export type ScreenConfig = {
   name: ScreenName;

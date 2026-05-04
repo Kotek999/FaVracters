@@ -1,0 +1,38 @@
+export const translations = {
+  pl: {
+    profile: "Profil",
+    settings: "Ustawienia",
+    changeName: "Zmień nazwę użytkownika",
+    newName: "Wpisz nową nazwę",
+    save: "Zapisz",
+    language: "Język",
+    copyright: "Wszelkie prawa zastrzeżone",
+  },
+  en: {
+    profile: "Profile",
+    settings: "Settings",
+    changeName: "Change user name",
+    newName: "Enter a new name",
+    save: "Save",
+    language: "Language",
+    copyright: "All rights reserved",
+  },
+  de: {
+    profile: "Profil",
+    settings: "Einstellungen",
+    changeName: "Ändern Sie Ihren Benutzernamen",
+    newName: "Geben Sie einen neuen Namen ein",
+    save: "Speichern",
+    language: "Sprache",
+    copyright: "Alle Rechte vorbehalten",
+  },
+  es: {
+    profile: "Perfil",
+    settings: "Ajustes",
+    changeName: "Cambia tu nombre de usuario",
+    newName: "Introduce un nuevo nombre",
+    save: "Ahorrar",
+    language: "Idioma",
+    copyright: "Reservados todos los derechos",
+  },
+} as const;

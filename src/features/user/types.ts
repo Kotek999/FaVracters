@@ -27,6 +27,8 @@ export type LoginReward =
   | { energy: number }
   | { rarity: Rarity };
 
+export type LanguageCode = "pl" | "en" | "de" | "es";
+
 export interface UserState {
   id: string;
   name: string;
@@ -34,6 +36,8 @@ export interface UserState {
   xp: number;
   cases: number;
   pendingCases: number;
+  language: LanguageCode;
+  setLanguage: (lang: LanguageCode) => void;
   setName: (newName: string) => void;
   addXp: (amount: number) => void;
   claimCases: () => void;

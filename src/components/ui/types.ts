@@ -44,3 +44,7 @@ export interface ProgressBarProps {
   height?: number;
   colors: readonly [ColorValue, ColorValue, ...ColorValue[]];
 }
+
+export interface ErrorMessageProps {
+  error: string | null;
+}

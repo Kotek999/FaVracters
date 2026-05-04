@@ -7,6 +7,7 @@ export const useUserStore = () => {
   const dailyRewardAt = userStore((state) => state.dailyRewardAt);
   const cases = userStore((state) => state.cases);
   const userName = userStore((state) => state.name);
+  const language = userStore((state) => state.language);
   const pendingCases = userStore((state) => state.pendingCases);
   const level = userStore((state) => state.level);
   const xp = userStore((state) => state.xp);
@@ -21,6 +22,8 @@ export const useUserStore = () => {
   const claimCases = userStore((state) => state.claimCases);
   const checkLogin = userStore((state) => state.checkLoginStreak);
   const useCase = userStore((state) => state.useCase);
+  const setName = userStore((state) => state.setName);
+  const setLanguage = userStore((state) => state.setLanguage);
   const spendEnergy = userStore((state) => state.spendEnergy);
 
   const clearUserStorage = userStore((state) => state.clearStorage);
@@ -32,6 +35,7 @@ export const useUserStore = () => {
     dailyRewardAt,
     cases,
     userName,
+    language,
     pendingCases,
     level,
     xp,
@@ -45,6 +49,8 @@ export const useUserStore = () => {
     claimCases,
     checkLogin,
     useCase,
+    setName,
+    setLanguage,
     spendEnergy,
     clearUserStorage,
   };

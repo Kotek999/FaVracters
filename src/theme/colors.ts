@@ -25,6 +25,7 @@ export const colors = {
   rare: "#7dddee",
   epic: "#a855f7",
   legendary: "#f8c51f",
+  error: "#ff6b6b",
   disabled: "#ccc",
   shadow: "#090a0a",
 } as const;
