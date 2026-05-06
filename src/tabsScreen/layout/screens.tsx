@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
-import { Text, Avatar } from "@ui-kitten/components";
+import { Avatar } from "@ui-kitten/components";
 import { ImageSourcePropType, TouchableOpacity } from "react-native";
 import { colors } from "@/theme/colors";
 import { HeaderIconButton } from "@/tabsScreen/components/HeaderIconButton";
@@ -74,28 +74,6 @@ export const screens = [
             size={18}
             color={colors.primary}
           />
-        }
-      />
-    ),
-
-    headerRight: () => (
-      <HeaderIconButton
-        style={{
-          flexDirection: "row",
-          width: 70,
-          borderRadius: 16,
-          gap: 5,
-        }}
-        onPress={() => alert("energy action clicked...")}
-        icon={
-          <>
-            <MaterialCommunityIcons
-              name="lightning-bolt"
-              size={18}
-              color={colors.primary}
-            />
-            <Text style={{ color: colors.primary }}>- - - -</Text>
-          </>
         }
       />
     ),

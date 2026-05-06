@@ -46,3 +46,11 @@ export interface CaseOpeningWithPreRollProps {
   readonly items: readonly CaseItem[];
   readonly onWin?: (item: CaseItem) => void;
 }
+
+export interface PrimaryCaseProps {
+  cases: number;
+}
+
+export interface UserCasesWithEnergyProps extends PrimaryCaseProps {
+  energy: number;
+}
