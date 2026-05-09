@@ -4,9 +4,8 @@ import { PreRollView } from "./PreRollView";
 import { usePitySystem } from "../hooks/usePitySystem";
 import { usePreRollAnimation } from "../hooks/usePreRollAnimation";
 import { MOVE } from "../consts";
+import { SafeAreaWithScrollView } from "@/components/layout/SafeAreaWithScrollView";
 import type { CaseItem, CaseOpeningWithPreRollProps } from "../types";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { AppScrollView } from "@/components/layout/AppScrollView";
 
 export default function CaseOpeningWithPreRoll({
   items,
@@ -39,17 +38,15 @@ export default function CaseOpeningWithPreRoll({
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
-      <AppScrollView>
-        <PreRollView
-          source={source}
-          styleTL={preRoll.styleTL}
-          styleTR={preRoll.styleTR}
-          styleBL={preRoll.styleBL}
-          styleBR={preRoll.styleBR}
-          onOpen={preRoll.animate}
-        />
-      </AppScrollView>
-    </SafeAreaView>
+    <SafeAreaWithScrollView edges={["top", "bottom"]}>
+      <PreRollView
+        source={source}
+        styleTL={preRoll.styleTL}
+        styleTR={preRoll.styleTR}
+        styleBL={preRoll.styleBL}
+        styleBR={preRoll.styleBR}
+        onOpen={preRoll.animate}
+      />
+    </SafeAreaWithScrollView>
   );
 }

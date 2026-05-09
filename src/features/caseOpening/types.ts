@@ -33,12 +33,15 @@ export interface ResultViewProps {
   readonly onBack: () => void;
 }
 
-export interface PreRollViewProps {
+export interface ImagePiecesProps {
   readonly source: ImageSourcePropType;
   readonly styleTL: AnimatedViewStyle;
   readonly styleTR: AnimatedViewStyle;
   readonly styleBL: AnimatedViewStyle;
   readonly styleBR: AnimatedViewStyle;
+}
+
+export interface PreRollViewProps extends ImagePiecesProps {
   readonly onOpen: () => void;
 }
 
@@ -53,4 +56,19 @@ export interface PrimaryCaseProps {
 
 export interface UserCasesWithEnergyProps extends PrimaryCaseProps {
   energy: number;
+}
+
+export interface RarityItem {
+  key: Rarity;
+  label: string;
+  chance: number;
+  dotColor: string;
+}
+
+export interface DropRarityRowProps {
+  item: RarityItem;
+}
+
+export interface DropChancesWithButtonItemProps {
+  onOpen: () => void;
 }
