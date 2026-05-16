@@ -9,8 +9,7 @@ import { fonts } from "@/theme/fonts";
 import { RarityRows as DropRarityRows } from "./RarityRows";
 
 export const Chances = () => {
-  const onPressRedirectToCaseDetailsScreen = () =>
-    router.push("/case-details-test");
+  const onPressRedirectToCaseDetailsScreen = () => router.push("/caseDetails");
 
   return (
     <View style={styles.mainContainer}>

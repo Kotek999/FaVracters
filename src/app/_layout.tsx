@@ -34,6 +34,14 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="caseDetails"
+            options={{
+              headerShown: false,
+              presentation: "card",
+              animation: "simple_push",
+            }}
+          />
+          <Stack.Screen
             name="shop"
             options={{
               headerShown: false,
