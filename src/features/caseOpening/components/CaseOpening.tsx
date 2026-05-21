@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -18,6 +18,7 @@ import { AppScrollView } from "@/components/layout/AppScrollView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PLAYER_XP_FROM_CARD } from "@/systems/progression/playerXp";
 import { userStore } from "@/features/user/store/userStore";
+import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
 import { CaseOpeningProps, CaseItem, Stage } from "../types";
 
 export const CaseOpening = ({
@@ -60,12 +61,12 @@ export const CaseOpening = ({
     userStore.getState().addXp(playerXp);
 
     if (result.isNew) {
-      Alert.alert(
+      showToastMessageInfo(
         "Nowa karta!",
         `${item.name} dodana do kolekcji\nLevel ${result.currentLevel}`,
       );
     } else {
-      Alert.alert(
+      showToastMessageInfo(
         "Duplikat!",
         `+${result.xpGained} XP\n+${playerXp} player XP`,
       );

@@ -1,50 +1,26 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useUserStore } from "@/features/user/store/useUserStore";
 import { colors } from "@/theme/colors";
-import { Button } from "@/components/ui/Button/Button";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
 import { CasesLeft } from "../CasesLeft";
 import { Chances as DropChances } from "./Chances";
-import { DropChancesWithButtonItemProps } from "../../types";
+import { useOpenCaseAction } from "@/features/caseOpening/hooks/useOpenCaseAction";
+import { DropChancesWithButtonItemProps } from "@/features/caseOpening/types";
+import { OpenCaseButton } from "@/features/caseOpening/components/OpenCaseButton";
 
 export const ChancesWithButtonItem = ({
   onOpen,
 }: DropChancesWithButtonItemProps) => {
-  const { cases, useCase } = useUserStore();
-
-  const onPressOpenCase = () => {
-    const canOpen = useCase();
-
-    if (!canOpen) {
-      showToastMessageInfo(
-        "Akcja zablokowana!",
-        "Nie masz wystarczającej ilości skrzynek",
-      );
-      return;
-    }
-    onOpen();
-  };
+  const { cases, onPressOpenCase } = useOpenCaseAction(onOpen);
 
   return (
     <>
       <CasesLeft cases={cases} />
       <DropChances />
-      <Button
+      <OpenCaseButton
         title="Otwórz"
-        variant="secondary"
+        iconName="rocket-launch"
         style={styles.button}
-        textStyle={styles.buttonText}
         onPress={onPressOpenCase}
-        icon={
-          <MaterialCommunityIcons
-            name="rocket-launch"
-            size={22}
-            color={colors.black}
-          />
-        }
-        iconPosition="left"
       />
     </>
   );

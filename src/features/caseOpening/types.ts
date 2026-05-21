@@ -1,8 +1,11 @@
 import type { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
 import type { AnimatedStyle, SharedValue } from "react-native-reanimated";
+import { rarityLabels } from "./consts";
+import { IconName } from "@/types/global";
 
 export const RARITIES = ["common", "rare", "epic", "legendary"] as const;
 
+export type RarityLabel = keyof typeof rarityLabels;
 export type Rarity = (typeof RARITIES)[number];
 
 export type SV = SharedValue<number>;
@@ -71,4 +74,22 @@ export interface DropRarityRowProps {
 
 export interface DropChancesWithButtonItemProps {
   onOpen: () => void;
+}
+
+export interface ResultActionButtonsProps {
+  winner: CaseItem;
+  onSpin: () => void;
+  onBack: () => void;
+}
+
+export interface DroppedCardProps {
+  winner: CaseItem;
+}
+
+export interface OpenCaseButtonProps {
+  title: string;
+  iconName: IconName;
+  isDefault?: boolean;
+  style?: ViewStyle | undefined;
+  onPress: () => void;
 }
