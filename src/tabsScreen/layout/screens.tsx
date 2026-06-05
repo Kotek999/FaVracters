@@ -42,7 +42,7 @@ export const screens = [
   },
 
   {
-    name: "second",
+    name: "collection",
     title: "Kolekcja",
     iconName: "view-grid",
 

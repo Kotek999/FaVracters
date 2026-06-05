@@ -1,30 +1,8 @@
+import { Animated, ImageSourcePropType } from "react-native";
 import type { CaseItem, Rarity } from "../caseOpening";
-
-export type FilterMode = "all" | "owned" | "missing";
-export type Corner = "top" | "right" | "bottom" | "left";
-
-export interface DiamondGeometry {
-  diamondPoints: string;
-  topPoints: string;
-  rightPoints: string;
-  bottomPoints: string;
-  leftPoints: string;
-  textY: number;
-  fontSize: number;
-}
 
 export interface CardItemProps {
   readonly item: CaseItem;
-}
-
-export interface DiamondLevelProps {
-  item: CaseItem;
-  SIZE?: number;
-  level: number;
-}
-
-export interface PolygonConfig {
-  points: string;
 }
 
 export interface ProgressBarAnimationsProps {
@@ -37,7 +15,7 @@ export interface ProgressBarProps {
   xpNeeded: number;
   height?: number;
   canLevelUp: boolean;
-  handleLevelUp: () => void;
+  onLevelUp?: () => void;
 }
 
 type Action<T> = (id: string, rarity: Rarity) => T;
@@ -75,3 +53,74 @@ export interface CollectionState {
   clear: () => void;
   clearStorage: () => Promise<void>;
 }
+
+export type FilterMode = "all" | "owned" | "missing";
+
+export interface FilterButtonProps {
+  label: string;
+  active: boolean;
+  onPress: () => void;
+}
+
+export interface FilterButtonsProps {
+  filterMode: FilterMode;
+  setFilterMode: React.Dispatch<React.SetStateAction<FilterMode>>;
+}
+
+export type FilterButtonsData = {
+  label: string;
+  filterMode: FilterMode;
+}[];
+
+type CardName = {
+  cardName?: string;
+};
+
+type CardRarity = {
+  cardRarity: Rarity;
+};
+
+type CardUnlockedInfo = {
+  imageSource: ImageSourcePropType;
+  cardLevel: number;
+  xp: number;
+  xpNeeded: number;
+  canLevelUp: boolean;
+  onLevelUp: () => void;
+  onPress: () => void;
+};
+
+export type FooterProps = CardName & CardRarity;
+
+export interface HeroInfoProps extends FooterProps {
+  isLevel?: boolean;
+  cardLevel?: number;
+}
+
+export interface CardLockedProps extends FooterProps {
+  imageSource: ImageSourcePropType;
+}
+
+export interface ShineAnimationProps {
+  shineAnim: Animated.Value;
+}
+
+export interface AnimatedGradientProps extends ShineAnimationProps {
+  animatedWidth: Animated.AnimatedInterpolation<string | number>;
+  canLevelUp: boolean;
+}
+
+export interface CardLockedItemProps extends FooterProps {
+  imageSource: ImageSourcePropType;
+}
+
+export interface GradientFooterProps extends FooterProps {
+  cardLevel: number;
+}
+
+export interface TouchableDetailsBadgeProps {
+  onPress: () => void;
+}
+
+export type CardUnlockedProps = CardUnlockedInfo & FooterProps;
+export type CardUnlockedItemProps = CardUnlockedInfo & CardItemProps;

@@ -19,11 +19,11 @@ export type TabsScreenOptions =
     }) => BottomTabNavigationOptions)
   | undefined;
 
-type ScreenName = "index" | "second" | "case" | "userProfile";
+type ScreenName = "index" | "collection" | "case" | "userProfile";
 
 export type RoutePath =
   | "/"
-  | "/second"
+  | "/collection"
   | "/case"
   | "/userProfile"
   | "/loginCalendar"

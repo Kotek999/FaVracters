@@ -20,7 +20,7 @@ export const useCardItemLevel = ({ item }: CardItemProps) => {
   const imageSource = isUnlocked ? { uri: item.image } : lockedImage;
   const canLevelUp = isUnlocked && xp >= xpNeeded && level < MAX_CARD_LEVEL;
 
-  const handleLevelUp = useCallback(() => {
+  const onLevelUp = useCallback(() => {
     if (!canLevelUp) return;
 
     levelUp(item.id, item.rarity);
@@ -32,7 +32,7 @@ export const useCardItemLevel = ({ item }: CardItemProps) => {
     level,
     xp,
     xpNeeded,
-    handleLevelUp,
+    onLevelUp,
     canLevelUp,
   };
 };
