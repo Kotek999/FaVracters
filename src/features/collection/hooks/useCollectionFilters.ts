@@ -1,15 +1,9 @@
 import { useMemo, useState } from "react";
 import { collectionStore } from "../store/collectionStore";
-import { CaseItem } from "@/features/caseOpening";
-import type { FilterMode } from "../types";
+import { Character } from "@/features/caseOpening";
+import { FilterMode, Filter } from "../types";
 
-enum Filter {
-  ALL = "all",
-  OWNED = "owned",
-  MISSING = "missing",
-}
-
-export const useCollectionFilters = (data: CaseItem[]) => {
+export const useCollectionFilters = (data: Character[]) => {
   const items = collectionStore((state) => state.items);
   const [filterMode, setFilterMode] = useState<FilterMode>(Filter.ALL);
 

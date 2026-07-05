@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { characters } from "@/data/characters";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HORIZONTAL_PADDING } from "@/features/collection/consts";
 import { useCollectionFilters } from "@/features/collection/hooks/useCollectionFilters";
@@ -9,12 +8,15 @@ import { FilterButtons } from "./FilterButton/FilterButtons";
 import { ListEmptyHeroCards } from "./ListEmptyHeroCards";
 import { useFlashListActions } from "../hooks/useFlashListActions";
 import { useCollectionStore } from "../store/useCollectionStore";
+import { CharactersRepo } from "@/data/characters.repo";
 
 export const Collection = () => {
   const { ownedCardsCount } = useCollectionStore();
 
+  const data = CharactersRepo.getAll();
+
   const { filterMode, setFilterMode, filteredData } =
-    useCollectionFilters(characters);
+    useCollectionFilters(data);
 
   const { renderItem, keyExtractor } = useFlashListActions();
 

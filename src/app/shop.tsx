@@ -144,7 +144,7 @@ export default function Shop() {
                 }}
               >
                 <Image
-                  source={require("@/assets/images/image_example_2.png")}
+                  source={require("@/assets/images/case.png")}
                   style={styles.image}
                   resizeMode="cover"
                 />

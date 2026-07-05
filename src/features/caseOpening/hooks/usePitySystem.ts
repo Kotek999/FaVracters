@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { BASE_LEGENDARY_CHANCE, MAX_BOOST } from "../consts";
-import { CaseItem, Rarity } from "../types";
+import { Character, Rarity, RARITY } from "../types";
 
 export function usePitySystem() {
   const spins = useRef<number>(0);
@@ -15,15 +15,15 @@ export function usePitySystem() {
     const roll = Math.random();
     const chance = BASE_LEGENDARY_CHANCE + boost;
 
-    if (roll < chance) return "legendary";
-    if (roll < chance + 0.09) return "epic";
-    if (roll < chance + 0.39) return "rare";
+    if (roll < chance) return RARITY.LEGENDARY;
+    if (roll < chance + 0.09) return RARITY.EPIC;
+    if (roll < chance + 0.39) return RARITY.RARE;
 
-    return "common";
+    return RARITY.COMMON;
   }, []);
 
-  const registerWin = useCallback((item: CaseItem) => {
-    if (item.rarity === "legendary") {
+  const registerWin = useCallback((item: Character) => {
+    if (item.rarity === RARITY.LEGENDARY) {
       spins.current = 0;
       setPityChance(0);
     } else {

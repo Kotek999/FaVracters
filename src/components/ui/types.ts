@@ -48,3 +48,8 @@ export interface ProgressBarProps {
 export interface ErrorMessageProps {
   error: string | null;
 }
+
+export type HighlightedTextProps = {
+  text: string;
+  names: string[];
+};

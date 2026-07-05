@@ -19,6 +19,7 @@ export const colors = {
   backgroundBrown: "#ff91002d",
   backgroundLime: "#22c55e",
   backgroundRed: "#ef4444",
+  backgroundYellow: "#facc15",
   backgroundBlur: "#073131",
   opacityDark: "rgba(0,0,0,0.8)",
   overlayDark: "rgba(0,0,0,0.6)",

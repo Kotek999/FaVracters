@@ -1,4 +1,4 @@
-import { View, Image, ImageSourcePropType, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
 import { HeroChancesRowProps } from "../types";
 
@@ -11,7 +11,7 @@ export const HeroImage = ({ rarity, item }: HeroChancesRowProps) => {
       }}
     >
       <Image
-        source={{ uri: item.image } as ImageSourcePropType}
+        source={item.image}
         style={{
           ...styles.image,
           borderColor: rarity.color,

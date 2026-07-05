@@ -9,7 +9,7 @@ import { ItemProps } from "../../types";
 export const Item = ({ dailyRewardAt, claimDailyReward }: ItemProps) => {
   const { hours, minutes, seconds, isReady } = useCountdown(dailyRewardAt);
 
-  const source: ImageSourcePropType = require("@/assets/images/image_example_2.png");
+  const source: ImageSourcePropType = require("@/assets/images/case.png");
 
   return (
     <ImageWithGradient

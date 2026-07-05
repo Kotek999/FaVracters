@@ -4,6 +4,7 @@ import { useCardItemLevel } from "../hooks/useCardItemLevel";
 import { CardLockedItem } from "./cardLocked/CardLockedItem";
 import { CardUnlockedItem } from "./cardUnlocked/CardUnlockedItem";
 import { CardItemProps } from "../types";
+import { ImageSourcePropType } from "react-native";
 
 export const CardItem = memo(({ item }: CardItemProps) => {
   const { progress, imageSource, level, xp, xpNeeded, onLevelUp, canLevelUp } =
@@ -16,7 +17,7 @@ export const CardItem = memo(({ item }: CardItemProps) => {
       {progress ? (
         <CardUnlockedItem
           item={item}
-          imageSource={imageSource}
+          imageSource={imageSource as ImageSourcePropType}
           xp={xp}
           xpNeeded={xpNeeded}
           cardLevel={level}
@@ -25,7 +26,10 @@ export const CardItem = memo(({ item }: CardItemProps) => {
           onPress={onPressRedirectToHeroCardScreen}
         />
       ) : (
-        <CardLockedItem imageSource={imageSource} cardRarity={item.rarity} />
+        <CardLockedItem
+          imageSource={imageSource as ImageSourcePropType}
+          cardRarity={item.rarity}
+        />
       )}
     </>
   );

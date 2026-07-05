@@ -1,36 +1,85 @@
 import type { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
 import type { AnimatedStyle, SharedValue } from "react-native-reanimated";
+import { characterImages } from "@/assets/images/characters";
 import { rarityLabels } from "./consts";
 import { IconName } from "@/types/global";
 
-export const RARITIES = ["common", "rare", "epic", "legendary"] as const;
+export const RARITY = {
+  COMMON: "common",
+  RARE: "rare",
+  EPIC: "epic",
+  LEGENDARY: "legendary",
+} as const;
 
+export type Rarity = (typeof RARITY)[keyof typeof RARITY];
 export type RarityLabel = keyof typeof rarityLabels;
-export type Rarity = (typeof RARITIES)[number];
+
+export enum CharacterClass {
+  LEADER = "przywódca",
+  WARRIOR = "wojownik",
+  SCOUT = "zwiadowca",
+  SCIENTIST = "naukowiec",
+  ASSASSIN = "zabójca",
+  SUPPORT = "wsparcie",
+  TANK = "wytrzymały",
+}
+
+export enum Faction {
+  AUTOBOT = "autobot",
+  DECEPTICON = "decepticon",
+}
+
+export interface CharacterStats {
+  readonly power: number;
+  readonly defense: number;
+  readonly intelligence: number;
+}
 
 export type SV = SharedValue<number>;
 export type Stage = "spin" | "result";
 
 export type AnimatedViewStyle = AnimatedStyle<StyleProp<ViewStyle>>;
 
-export interface CaseItem {
+export type CharacterKey = keyof typeof characterImages;
+
+export interface CharacterBase {
   readonly id: string;
+  readonly key: CharacterKey;
   readonly name: string;
-  readonly image: string;
   readonly rarity: Rarity;
+  readonly class: CharacterClass;
+  readonly faction: Faction;
+  readonly stars: number;
+  readonly origin: string;
+  readonly lore: string;
+  readonly stats: CharacterStats;
+}
+
+export interface Character extends CharacterBase {
+  readonly image: ImageSourcePropType;
+}
+
+export interface CharacterWithRating extends Character {
+  readonly rating: number;
+}
+
+export type CharactersIndex = Record<string, CharacterWithRating>;
+
+export interface CardProps {
+  card: CharacterWithRating;
 }
 
 export interface CaseOpeningProps {
-  readonly items: readonly CaseItem[];
+  readonly items: readonly Character[];
   readonly pityChance: number;
   readonly getRarity: () => Rarity;
-  readonly onWin?: (item: CaseItem) => void;
+  readonly onWin?: (item: Character) => void;
   readonly onReset?: () => void;
   readonly autoSpin?: boolean;
 }
 
 export interface ResultViewProps {
-  readonly winner: CaseItem;
+  readonly winner: Character;
   readonly pityChance: number;
   readonly onSpin: () => void;
   readonly onBack: () => void;
@@ -49,8 +98,8 @@ export interface PreRollViewProps extends ImagePiecesProps {
 }
 
 export interface CaseOpeningWithPreRollProps {
-  readonly items: readonly CaseItem[];
-  readonly onWin?: (item: CaseItem) => void;
+  readonly items: readonly Character[];
+  readonly onWin?: (item: Character) => void;
 }
 
 export interface PrimaryCaseProps {
@@ -77,13 +126,13 @@ export interface DropChancesWithButtonItemProps {
 }
 
 export interface ResultActionButtonsProps {
-  winner: CaseItem;
+  winner: Character;
   onSpin: () => void;
   onBack: () => void;
 }
 
 export interface DroppedCardProps {
-  winner: CaseItem;
+  winner: Character;
 }
 
 export interface OpenCaseButtonProps {

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { collectionStore } from "./collectionStore";
 
 export const useCollectionStore = () => {
@@ -9,10 +10,14 @@ export const useCollectionStore = () => {
   const useIsOwned = (id: string) =>
     collectionStore((state) => !!state.items[id]);
 
+  const getCardProgress = (id: string) =>
+    collectionStore(useCallback((state) => state.items[id], [id]));
+
   return {
     ownedCardsCount,
     highestCardRarity,
     clearCollectionStorage,
     useIsOwned,
+    getCardProgress,
   };
 };

@@ -1,5 +1,5 @@
 import { IconName } from "@/types/global";
-import { CaseItem } from "../caseOpening";
+import { Character } from "../caseOpening";
 import { LoginReward } from "../user/types";
 
 export interface TodayProps {
@@ -10,7 +10,7 @@ export interface TodayProps {
 export interface RewardDayProps extends TodayProps {
   day: number;
   reward: LoginReward;
-  epicHeroReward: CaseItem | undefined;
+  epicHeroReward: Character | undefined;
   isClaimed: boolean;
 }
 
@@ -32,6 +32,6 @@ export interface DayItemProps extends TodayProps {
 }
 
 export interface EpicHeroItemProps extends TitleProps {
-  epicHeroReward: CaseItem | undefined;
+  epicHeroReward: Character | undefined;
   reward: LoginReward;
 }

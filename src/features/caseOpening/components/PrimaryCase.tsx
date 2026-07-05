@@ -17,7 +17,7 @@ import { PrimaryCaseProps } from "../types";
 
 export const PrimaryCase = ({ cases }: PrimaryCaseProps) => {
   const onPressRedirectToCaseSpinScreen = () => router.push("/caseSpin");
-  const source: ImageSourcePropType = require("@/assets/images/image_example_2.png");
+  const source: ImageSourcePropType = require("@/assets/images/case.png");
 
   return (
     <View style={styles.mainContainer}>

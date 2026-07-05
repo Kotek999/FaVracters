@@ -1,8 +1,8 @@
 import { Animated, ImageSourcePropType } from "react-native";
-import type { CaseItem, Rarity } from "../caseOpening";
+import type { Character, Rarity } from "../caseOpening";
 
 export interface CardItemProps {
-  readonly item: CaseItem;
+  readonly item: Character;
 }
 
 export interface ProgressBarAnimationsProps {
@@ -55,6 +55,12 @@ export interface CollectionState {
 }
 
 export type FilterMode = "all" | "owned" | "missing";
+
+export enum Filter {
+  ALL = "all",
+  OWNED = "owned",
+  MISSING = "missing",
+}
 
 export interface FilterButtonProps {
   label: string;
@@ -124,3 +130,7 @@ export interface TouchableDetailsBadgeProps {
 
 export type CardUnlockedProps = CardUnlockedInfo & FooterProps;
 export type CardUnlockedItemProps = CardUnlockedInfo & CardItemProps;
+
+export interface CardProgressProps {
+  cardId: string;
+}

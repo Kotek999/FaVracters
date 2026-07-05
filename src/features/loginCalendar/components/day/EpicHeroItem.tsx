@@ -19,7 +19,7 @@ export const EpicHeroItem = ({
     <>
       {"rarity" in reward && (
         <Image
-          source={{ uri: epicHeroReward.image }}
+          source={epicHeroReward.image}
           style={{
             ...styles.image,
             borderColor: rarityColor[reward.rarity],

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { RenderCardItem } from "@/features/collection/components/CardItem";
-import type { CaseItem } from "@/features/caseOpening";
+import type { Character } from "@/features/caseOpening";
 import type { CardItemProps } from "@/features/collection/types";
 
 export const useFlashListActions = () => {
@@ -8,7 +8,7 @@ export const useFlashListActions = () => {
     return <RenderCardItem item={item} />;
   }, []);
 
-  const keyExtractor = useCallback((item: CaseItem) => item.id, []);
+  const keyExtractor = useCallback((item: Character) => item.id, []);
 
   return { renderItem, keyExtractor };
 };

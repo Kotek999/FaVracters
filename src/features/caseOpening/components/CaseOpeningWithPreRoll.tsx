@@ -1,23 +1,24 @@
 import React, { useCallback } from "react";
+import { ImageSourcePropType } from "react-native";
 import { CaseOpening } from "./CaseOpening";
 import { PreRollView } from "./PreRollView";
 import { usePitySystem } from "../hooks/usePitySystem";
 import { usePreRollAnimation } from "../hooks/usePreRollAnimation";
 import { MOVE } from "../consts";
 import { SafeAreaWithScrollView } from "@/components/layout/SafeAreaWithScrollView";
-import type { CaseItem, CaseOpeningWithPreRollProps } from "../types";
+import type { Character, CaseOpeningWithPreRollProps } from "../types";
 
 export default function CaseOpeningWithPreRoll({
   items,
   onWin,
 }: CaseOpeningWithPreRollProps) {
-  const source = require("@/assets/images/image_example_2.png");
+  const source: ImageSourcePropType = require("@/assets/images/case.png");
 
   const pity = usePitySystem();
   const preRoll = usePreRollAnimation(MOVE);
 
   const handleWin = useCallback(
-    (item: CaseItem) => {
+    (item: Character) => {
       pity.registerWin(item);
       onWin?.(item);
     },

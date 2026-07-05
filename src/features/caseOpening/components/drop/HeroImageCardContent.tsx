@@ -12,7 +12,7 @@ export const HeroImageCardContent = ({ winner }: DroppedCardProps) => {
   return (
     <>
       <Image
-        source={{ uri: winner.image as string }}
+        source={winner.image}
         style={styles.image}
         resizeMode="cover"
         alt="image"

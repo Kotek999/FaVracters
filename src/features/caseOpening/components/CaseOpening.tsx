@@ -19,7 +19,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PLAYER_XP_FROM_CARD } from "@/systems/progression/playerXp";
 import { userStore } from "@/features/user/store/userStore";
 import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
-import { CaseOpeningProps, CaseItem, Stage } from "../types";
+import { getRandomFromPool } from "../utils/getRandomFromPool";
+import { CaseOpeningProps, Character, Stage } from "../types";
 
 export const CaseOpening = ({
   items,
@@ -30,8 +31,8 @@ export const CaseOpening = ({
   autoSpin,
 }: CaseOpeningProps) => {
   const [stage, setStage] = useState<Stage>("spin");
-  const [strip, setStrip] = useState<CaseItem[]>([]);
-  const [winner, setWinner] = useState<CaseItem | null>(null);
+  const [strip, setStrip] = useState<Character[]>([]);
+  const [winner, setWinner] = useState<Character | null>(null);
 
   const pools = useMemo(() => groupByRarity(items), [items]);
 
@@ -41,7 +42,7 @@ export const CaseOpening = ({
     transform: [{ translateX: tx.value }],
   }));
 
-  const handleWin = (item: CaseItem) => {
+  const handleWin = (item: Character) => {
     setWinner(item);
     setStage("result");
     onWin?.(item);
@@ -80,26 +81,43 @@ export const CaseOpening = ({
     spin();
   };
 
-  const spin = () => {
-    const rarity = getRarity();
-    const pool = pools[rarity];
+  const allItems = useMemo(() => {
+    const result: Character[] = [];
 
-    const winnerItem = pool[Math.floor(Math.random() * pool.length)];
+    result.push(...pools.common);
+    result.push(...pools.rare);
+    result.push(...pools.epic);
+    result.push(...pools.legendary);
+
+    return result;
+  }, [pools]);
+
+  const getWinner = () => {
+    const pool = pools[getRarity()];
+
+    const primary = getRandomFromPool(pool);
+    if (primary) return primary;
+
+    return getRandomFromPool(allItems);
+  };
+
+  const spin = () => {
+    const finalWinner = getWinner();
+    if (!finalWinner) return;
 
     const { strip, winnerIndex } = generateStrip(
       items,
-      winnerItem,
+      finalWinner,
       pools.legendary,
     );
 
     setStrip(strip);
-
     const target = winnerIndex * FULL_WIDTH + ITEM_WIDTH / 2 - screenWidth / 2;
 
     tx.value = withTiming(
       -target,
       { duration: 4500, easing: Easing.out(Easing.cubic) },
-      () => runOnJS(handleWin)(winnerItem),
+      () => runOnJS(handleWin)(finalWinner),
     );
   };
 

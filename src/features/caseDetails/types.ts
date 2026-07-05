@@ -1,4 +1,4 @@
-import { CaseItem, Rarity } from "../caseOpening";
+import { Character, Rarity } from "../caseOpening";
 
 interface HeroRarityProps {
   chance: number;
@@ -11,5 +11,5 @@ export type RarityConfig = Record<Rarity, HeroRarityProps>;
 
 export interface HeroChancesRowProps {
   rarity: HeroRarityProps;
-  item: CaseItem;
+  item: Character;
 }
