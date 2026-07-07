@@ -7,7 +7,7 @@ import { HeaderIconButton } from "@/tabsScreen/components/HeaderIconButton";
 import { navigate } from "../utils/navigate";
 import { ScreenConfig } from "@/tabsScreen/types";
 
-const source: ImageSourcePropType = require("../../assets/images/image_example_1.png");
+const source: ImageSourcePropType = require("../../assets/images/avatar.png");
 
 export const screens = [
   {

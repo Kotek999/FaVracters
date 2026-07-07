@@ -6,7 +6,7 @@ import { ProgressProps as AvatarWithLevelProps } from "../types";
 
 export const AvatarWithLevel = ({ progress }: AvatarWithLevelProps) => {
   const strokeDashoffset = CIRCUMFERENCE - CIRCUMFERENCE * progress;
-  const source: ImageSourcePropType = require("@/assets/images/image_example_1.png");
+  const source: ImageSourcePropType = require("@/assets/images/avatar.png");
 
   return (
     <View style={styles.container}>
