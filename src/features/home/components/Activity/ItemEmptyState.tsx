@@ -3,7 +3,7 @@ import { BlurView } from "expo-blur";
 import { View, StyleSheet } from "react-native";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";
-import { ItemEmptyStateProps } from "../../types";
+import { ItemEmptyStateProps } from "@/features/home/types";
 
 export const ItemEmptyState = ({ title, subtitle }: ItemEmptyStateProps) => {
   return (

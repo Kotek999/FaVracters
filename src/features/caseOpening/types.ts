@@ -142,3 +142,27 @@ export interface OpenCaseButtonProps {
   style?: ViewStyle | undefined;
   onPress: () => void;
 }
+
+interface Spin {
+  readonly items: readonly Character[];
+  readonly getRarity: () => "common" | "rare" | "epic" | "legendary";
+  readonly onWin?: (item: Character) => void;
+}
+
+export interface CaseSpinProps extends Spin {
+  readonly autoSpin?: boolean;
+}
+
+export interface SpinProps extends Spin {
+  pools: Record<Rarity, Character[]>;
+}
+
+export interface NewHeroCardProps {
+  result: {
+    isNew: boolean;
+    xpGained: number;
+    currentLevel: number;
+  };
+  item: Character;
+  playerXp: number;
+}

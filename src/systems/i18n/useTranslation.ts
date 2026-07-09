@@ -1,8 +1,8 @@
-import { userStore } from "@/features/user/store/userStore";
+import { useUserStore } from "@/features/user/store/useUserStore";
 import { translations } from "./translations";
 
 export const useTranslation = () => {
-  const lang = userStore((state) => state.language);
+  const { lang } = useUserStore();
 
   return (key: keyof (typeof translations)["pl"]) => translations[lang][key];
 };

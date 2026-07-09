@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { StartContentProps } from "../../types";
+import { StartContentProps } from "@/features/settings/types";
 
 export const StartContent = ({
   title,
@@ -13,7 +13,6 @@ export const StartContent = ({
   return (
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
-
       <Pressable onPress={toggle} hitSlop={10}>
         <Animated.View style={iconStyle}>
           <MaterialCommunityIcons

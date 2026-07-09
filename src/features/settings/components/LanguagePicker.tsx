@@ -4,7 +4,8 @@ import { BlurView } from "expo-blur";
 import { colors } from "@/theme/colors";
 import { LANGUAGES } from "../utils/languages";
 import { LanguageContent } from "./LanguageContent";
-import { LanguageCode, LanguagePickerProps } from "../types";
+import { LanguageCode } from "@/features/user/types";
+import { LanguagePickerProps } from "../types";
 
 export const LanguagePicker = ({ selected, onSelect }: LanguagePickerProps) => {
   const onPressSelect = useCallback(

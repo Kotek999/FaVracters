@@ -4,7 +4,7 @@ import { screenWidth } from "@/utils/dimensions";
 import { colors } from "@/theme/colors";
 import { EpicHeroItem } from "../day/EpicHeroItem";
 import { Item as DayItem } from "../day/Item";
-import { RewardDayProps } from "../../types";
+import { RewardDayProps } from "@/features/loginCalendar/types";
 
 const numColumns: number = screenWidth < 350 ? 2 : 3;
 

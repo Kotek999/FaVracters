@@ -5,6 +5,8 @@ export const useCollectionStore = () => {
   const ownedCardsCount = collectionStore((state) => state.ownedCardsCount);
   const highestCardRarity = collectionStore((state) => state.highestCardRarity);
 
+  const levelUp = collectionStore((state) => state.levelUp);
+
   const clearCollectionStorage = collectionStore((state) => state.clearStorage);
 
   const useIsOwned = (id: string) =>
@@ -16,6 +18,7 @@ export const useCollectionStore = () => {
   return {
     ownedCardsCount,
     highestCardRarity,
+    levelUp,
     clearCollectionStorage,
     useIsOwned,
     getCardProgress,

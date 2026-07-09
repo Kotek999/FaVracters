@@ -1,25 +1,27 @@
 import React, { memo } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { getBackgroundColor } from "./getBackgroundColor";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { screenWidth } from "@/utils/dimensions";
+import { TOAST_VARIANTS } from "./ToastConfig";
 import { ToastProps } from "../types";
 
 export const Toast = memo(({ text1, text2, variant }: ToastProps) => {
+  const variantConfig = TOAST_VARIANTS[variant];
+
   return (
     <View
       style={[
         styles.mainContainer,
-        { backgroundColor: getBackgroundColor(variant) },
+        { borderTopColor: variantConfig.borderColor },
       ]}
     >
       <View style={styles.container}>
         <MaterialCommunityIcons
-          name="treasure-chest-outline"
+          name={variantConfig.icon}
           size={26}
-          color={colors.legendary}
+          color={variantConfig.iconColor}
         />
 
         <View>
@@ -34,6 +36,7 @@ export const Toast = memo(({ text1, text2, variant }: ToastProps) => {
 const styles = StyleSheet.create({
   mainContainer: {
     width: screenWidth - 30,
+    backgroundColor: colors.backgroundDarkGreen,
     borderRadius: 8,
     padding: 16,
     shadowColor: "#000",
@@ -41,7 +44,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
     borderTopWidth: 6,
-    borderTopColor: colors.primary,
   },
   container: {
     flexDirection: "row",

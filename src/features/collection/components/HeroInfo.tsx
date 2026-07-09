@@ -11,7 +11,6 @@ export const HeroInfo = ({
   isLevel = true,
   cardLevel,
 }: HeroInfoProps) => {
-  const rarityLabel = getRarityLabel(cardRarity);
   return (
     <View style={styles.mainContainer}>
       <View>
@@ -22,7 +21,7 @@ export const HeroInfo = ({
             color: rarityColor[cardRarity],
           }}
         >
-          {rarityLabel}
+          {getRarityLabel(cardRarity)}
         </Text>
         <Text style={{ ...styles.cardNameText, ...styles.shadowText }}>
           {cardName}

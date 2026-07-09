@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import { screenWidth } from "@/utils/dimensions";
 import { useUserStore } from "@/features/user/store/useUserStore";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
 import { SafeAreaWithScrollView } from "@/components/layout/SafeAreaWithScrollView";
+import { useToastActions } from "@/hooks/useToastActions";
 import { Header } from "./Header";
 import { CategoryTitle } from "./CategoryTitle";
 import { PrimaryCaseToBuy } from "./PrimaryCaseToBuy";
@@ -10,27 +10,14 @@ import { EnergyToBuyCards } from "./EnergyToBuyCards";
 
 export const Shop = () => {
   const { energy, spendEnergy } = useUserStore();
-
-  const buyCase = () => {
-    const success = spendEnergy(25);
-
-    if (!success) {
-      showToastMessageInfo(
-        "Zakup nieudany - Brak energii",
-        "Zdobądź lub kup potrzebną walutę",
-      );
-      return;
-    } else {
-      showToastMessageInfo("Zakup udany", "Dodano nową zawartość");
-    }
-  };
+  const { buyCase } = useToastActions();
 
   return (
     <SafeAreaWithScrollView edges={["top", "bottom"]}>
       <View style={styles.mainContainer}>
         <Header energy={energy} />
         <CategoryTitle title="Skrzynki" />
-        <PrimaryCaseToBuy onPress={buyCase} />
+        <PrimaryCaseToBuy onPress={() => buyCase(spendEnergy)} />
         <CategoryTitle title="Waluta" />
         <EnergyToBuyCards />
       </View>

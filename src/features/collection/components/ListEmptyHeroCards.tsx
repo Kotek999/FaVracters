@@ -1,14 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
+import { Navigation, routes } from "@/navigation";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { Button } from "@/components/ui/Button/Button";
-import { router } from "expo-router";
 
 export const ListEmptyHeroCards = () => {
-  const onPressRedirectToCaseScreen = () => router.push("/case");
-
   return (
     <View style={styles.mainContainer}>
       <MaterialCommunityIcons
@@ -24,7 +22,7 @@ export const ListEmptyHeroCards = () => {
         title="Zdobądź karty"
         variant="secondary"
         textStyle={{ color: colors.textDark }}
-        onPress={onPressRedirectToCaseScreen}
+        onPress={() => Navigation.push(routes.case)}
       />
     </View>
   );

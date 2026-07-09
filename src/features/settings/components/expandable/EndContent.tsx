@@ -7,10 +7,10 @@ import { StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
 import { Input } from "@ui-kitten/components";
 import { Button } from "@/components/ui/Button/Button";
-import { useUsernameChange } from "../../hooks/useUsernameChange";
-import { renderIcon } from "../../utils/renderIcon";
+import { useUsernameChange } from "@/features/settings/hooks/useUsernameChange";
+import { renderIcon } from "@/features/settings/utils/renderIcon";
 import { ErrorMessage } from "@/components/ui/ErrorMessage/ErrorMessage";
-import { EndContentProps } from "../../types";
+import { EndContentProps } from "@/features/settings/types";
 
 export const EndContent = ({ placeholder, buttonTitle }: EndContentProps) => {
   const { value, error, dirty, onChangeText, onPressSave } =

@@ -1,10 +1,5 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ImageSourcePropType,
-} from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
+import { Images } from "@/assets/images/characters";
 import { screenHeight } from "@/utils/dimensions";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button/Button";
@@ -13,16 +8,14 @@ import { fonts } from "@/theme/fonts";
 import { PrimaryCaseToBuyProps } from "@/features/shop/types";
 
 export const PrimaryCaseToBuy = ({ onPress }: PrimaryCaseToBuyProps) => {
-  const source: ImageSourcePropType = require("@/assets/images/case.png");
-
   return (
     <View>
       <View style={styles.mainContainer}>
         <View style={styles.imageContainer}>
-          <Image source={source} style={styles.image} resizeMode="cover" />
+          <Image source={Images.case} style={styles.image} resizeMode="cover" />
           <View style={styles.caseContainer}>
             <Text style={[styles.titleText, styles.shadowText]}>
-              Skrzynia bohaterów
+              Skrzynia Bohaterów
             </Text>
             <Text style={[styles.descriptionText, styles.shadowText]}>
               x1 Skrzynka

@@ -4,7 +4,7 @@ import { screenHeight } from "@/utils/dimensions";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { LinearGradient } from "expo-linear-gradient";
-import { DropRarityRowProps } from "../../types";
+import { DropRarityRowProps } from "@/features/caseOpening/types";
 
 export const RarityRow = memo(({ item }: DropRarityRowProps) => {
   return (

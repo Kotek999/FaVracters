@@ -1,14 +1,17 @@
 import { useUserStore } from "@/features/user/store/useUserStore";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
+import { toast } from "@/components/ui/Toast/ToastService";
 
-export const useOpenCaseAction = (onAction: () => void) => {
+export const useOpenCaseAction = (
+  onAction: () => void,
+  onBack?: () => void,
+) => {
   const { cases, useCase } = useUserStore();
 
   const onPressOpenCase = () => {
     const canOpen = useCase();
 
     if (!canOpen) {
-      showToastMessageInfo(
+      toast.error(
         "Akcja zablokowana!",
         "Nie masz wystarczającej ilości skrzynek",
       );
@@ -17,8 +20,14 @@ export const useOpenCaseAction = (onAction: () => void) => {
     onAction();
   };
 
+  const onPressAddToCollection = () => {
+    toast.success("Akcja udana!", "Bohater został dodany do kolekcji");
+    onBack && onBack();
+  };
+
   return {
     cases,
     onPressOpenCase,
+    onPressAddToCollection,
   };
 };

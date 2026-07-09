@@ -1,10 +1,11 @@
 import { timeService } from "./TimeService";
+import { Time } from "./consts";
 
 export const timeAgo = (timestamp: number) => {
   const now = timeService.getNow();
   const diff = Math.max(now - timestamp, 0);
 
-  const sec = Math.floor(diff / 1000);
+  const sec = Math.floor(diff / Time.SECOND);
   if (sec < 5) return "Przed chwilą";
   if (sec < 60) return `${sec}s temu`;
 

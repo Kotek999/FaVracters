@@ -1,5 +1,8 @@
 import { View, StyleSheet } from "react-native";
-import { CARD_ITEM_MARGIN, CARD_ITEM_WIDTH } from "../../consts";
+import {
+  CARD_ITEM_MARGIN,
+  CARD_ITEM_WIDTH,
+} from "@/features/collection/consts";
 import { rarityColor } from "@/features/caseOpening/consts";
 import { colors } from "@/theme/colors";
 import { CardUnlocked } from "./CardUnlocked";

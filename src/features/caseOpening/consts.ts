@@ -22,8 +22,20 @@ export const rarityColor = {
 };
 
 export const rarityLabels = {
-  common: "zwyczajny",
-  rare: "rzadki",
-  epic: "epicki",
-  legendary: "legendarny",
+  common: {
+    base: "zwyczajny",
+    hero: "zwykłego",
+  },
+  rare: {
+    base: "rzadki",
+    hero: "rzadkiego",
+  },
+  epic: {
+    base: "epicki",
+    hero: "epickiego",
+  },
+  legendary: {
+    base: "legendarny",
+    hero: "legendarnego",
+  },
 } as const;

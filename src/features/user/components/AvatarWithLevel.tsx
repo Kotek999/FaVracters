@@ -1,12 +1,12 @@
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
-import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
+import { Images } from "@/assets/images/characters";
 import { SIZE, STROKE_WIDTH, RADIUS, CIRCUMFERENCE } from "../consts";
 import { colors } from "@/theme/colors";
 import { ProgressProps as AvatarWithLevelProps } from "../types";
 
 export const AvatarWithLevel = ({ progress }: AvatarWithLevelProps) => {
   const strokeDashoffset = CIRCUMFERENCE - CIRCUMFERENCE * progress;
-  const source: ImageSourcePropType = require("@/assets/images/avatar.png");
 
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ export const AvatarWithLevel = ({ progress }: AvatarWithLevelProps) => {
           </LinearGradient>
         </Defs>
         <Circle
-          stroke="#1E3A3F"
+          stroke={colors.backgroundNavDarkGreen}
           fill="none"
           cx={SIZE / 2}
           cy={SIZE / 2}
@@ -40,7 +40,7 @@ export const AvatarWithLevel = ({ progress }: AvatarWithLevelProps) => {
           origin={`${SIZE / 2}, ${SIZE / 2}`}
         />
       </Svg>
-      <Image source={source} style={styles.avatar} />
+      <Image source={Images.avatar} style={styles.avatar} />
     </View>
   );
 };

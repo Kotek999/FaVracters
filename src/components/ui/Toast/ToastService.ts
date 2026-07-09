@@ -1,40 +1,32 @@
 import Toast from "react-native-toast-message";
-import { ToastOptions, ToastType } from "../types";
+import { ToastType } from "../types";
 
 class ToastService {
-  private show<T extends ToastType>({ type, payload }: ToastOptions<T>) {
+  private show(
+    type: ToastType,
+    title: string,
+    message?: string,
+    duration = 3000,
+  ) {
     Toast.show({
       type,
-      text1: payload.title,
-      text2: payload.message,
-      visibilityTime: payload.duration ?? 3000,
+      text1: title,
+      text2: message,
+      visibilityTime: duration,
       position: "top",
     });
   }
 
   success(title: string, message?: string) {
-    this.show({
-      type: "success",
-      payload: { title, message },
-    });
+    this.show("success", title, message);
   }
 
   error(title: string, message?: string) {
-    this.show({
-      type: "error",
-      payload: { title, message },
-    });
+    this.show("error", title, message);
   }
 
   info(title: string, message?: string) {
-    this.show({
-      type: "info",
-      payload: { title, message },
-    });
-  }
-
-  custom(options: ToastOptions) {
-    this.show(options);
+    this.show("info", title, message);
   }
 }
 

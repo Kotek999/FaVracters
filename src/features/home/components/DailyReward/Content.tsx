@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Header } from "./Header";
 import { Timer } from "./Timer";
 import { Footer } from "./Footer";
-import { ContentProps } from "../../types";
+import { ContentProps } from "@/features/home/types";
 
 export const Content = ({
   isReady,

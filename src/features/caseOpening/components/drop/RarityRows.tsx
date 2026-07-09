@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { RARITIES_DATA } from "../../data/raritiesData";
+import { RARITIES_DATA } from "@/features/caseOpening/data/raritiesData";
 import { RarityRow as DropRarityRow } from "./RarityRow";
-import { chunkArray } from "../../utils/chunkArray";
+import { chunkArray } from "@/features/caseOpening/utils/chunkArray";
 
 export const RarityRows = () => {
   const rows = chunkArray(RARITIES_DATA, 2);

@@ -1,11 +1,6 @@
-import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { router } from "expo-router";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { Navigation, routes } from "@/navigation";
+import { Images } from "@/assets/images/characters";
 import { MaterialIcons } from "@expo/vector-icons";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,8 +11,8 @@ import { Button } from "@/components/ui/Button/Button";
 import { PrimaryCaseProps } from "../types";
 
 export const PrimaryCase = ({ cases }: PrimaryCaseProps) => {
-  const onPressRedirectToCaseSpinScreen = () => router.push("/caseSpin");
-  const source: ImageSourcePropType = require("@/assets/images/case.png");
+  const casesExistTitle: string =
+    cases === 0 ? "Brak dostępnych skrzynek" : "Przejdź do skrzynki";
 
   return (
     <View style={styles.mainContainer}>
@@ -40,14 +35,14 @@ export const PrimaryCase = ({ cases }: PrimaryCaseProps) => {
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            title="Przejdź do skrzynki"
+            title={casesExistTitle}
             variant="secondary"
             disabled={cases === 0}
             textStyle={{ color: colors.textDark }}
-            onPress={onPressRedirectToCaseSpinScreen}
+            onPress={() => Navigation.push(routes.caseSpin)}
           />
         </View>
-        <Image style={styles.image} source={source} />
+        <Image source={Images.case} style={styles.image} />
       </LinearGradient>
     </View>
   );

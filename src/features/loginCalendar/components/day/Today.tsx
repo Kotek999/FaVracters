@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { TodayProps } from "../../types";
+import { TodayProps } from "@/features/loginCalendar/types";
 
 export const Today = ({ isToday, isFuture }: TodayProps) => {
   return (

@@ -1,36 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import * as Crypto from "expo-crypto";
-import { zustandStorage } from "@/utils/storage";
+import { zustandStorage, STORAGE_KEYS } from "@/utils/storage";
 import {
   getPlayerXpNeeded,
   MAX_PLAYER_LEVEL,
 } from "@/systems/progression/playerXp";
 import { getRewardCases } from "@/systems/progression/playerRewards";
-import { Alert } from "react-native";
 import { getRandomEpicReward } from "../utils/getRandomEpicReward";
 import { LOGIN_DAYS, LOGIN_REWARDS } from "@/systems/progression/loginRewards";
+import { toast } from "@/components/ui/Toast/ToastService";
 import { Time } from "@/systems/time/consts";
+import { createInitialUser } from "../utils/initialUserConfig";
 import { UserState } from "../types";
-
-const STORAGE_KEY = "user-storage";
-
-const randomName = () => `Player${Math.floor(100000 + Math.random() * 900000)}`;
-
-const createInitialUser = () => ({
-  id: Crypto.randomUUID(),
-  name: randomName(),
-  level: 1,
-  xp: 0,
-  cases: 0,
-  energy: 0,
-  pendingCases: 0,
-  dailyRewardAt: Date.now(),
-  loginStreakDay: 0,
-  lastLoginAt: 0,
-  loginRewardAvailable: false,
-  activities: [],
-});
 
 export const userStore = create<UserState>()(
   persist(
@@ -39,10 +20,6 @@ export const userStore = create<UserState>()(
       level: 1,
       xp: 0,
       language: "pl",
-      // setName: (newName) =>
-      //   set({
-      //     name: newName,
-      //   }),
       setName: (name) => {
         const trimmed = name.trim();
 
@@ -93,14 +70,15 @@ export const userStore = create<UserState>()(
 
           addEnergy(level * 5);
 
-          Alert.alert(
-            "Level Up!",
-            `Osiągnąłeś poziom ${newLevel}${
-              totalPending > 0
-                ? `\n🎁 Masz ${totalPending} skrzynek do odebrania w profilu`
-                : ""
-            }`,
-          );
+          () =>
+            toast.success(
+              "Level Up!",
+              `Osiągnąłeś poziom ${newLevel}${
+                totalPending > 0
+                  ? `\n🎁 Masz ${totalPending} skrzynek do odebrania w profilu`
+                  : ""
+              }`,
+            );
         }
       },
       claimCases: () => {
@@ -263,7 +241,7 @@ export const userStore = create<UserState>()(
       },
     }),
     {
-      name: STORAGE_KEY,
+      name: STORAGE_KEYS.user,
       storage: zustandStorage,
       partialize: (state) => ({
         id: state.id,

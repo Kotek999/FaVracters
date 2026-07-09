@@ -1,13 +1,11 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { router } from "expo-router";
+import { TouchableOpacity } from "react-native";
+import { Navigation, routes } from "@/navigation";
 import { Avatar } from "@ui-kitten/components";
-import { ImageSourcePropType, TouchableOpacity } from "react-native";
 import { colors } from "@/theme/colors";
+import { Images } from "@/assets/images/characters";
 import { HeaderIconButton } from "@/tabsScreen/components/HeaderIconButton";
-import { navigate } from "../utils/navigate";
 import { ScreenConfig } from "@/tabsScreen/types";
-
-const source: ImageSourcePropType = require("../../assets/images/avatar.png");
 
 export const screens = [
   {
@@ -16,19 +14,19 @@ export const screens = [
     iconName: "home-variant",
 
     headerLeft: () => (
-      <TouchableOpacity onPress={() => navigate("/userProfile")}>
+      <TouchableOpacity onPress={() => Navigation.push(routes.userProfile)}>
         <Avatar
           borderRadius={20}
           style={{ borderWidth: 1, borderColor: colors.borderPrimary }}
           size="medium"
-          source={source}
+          source={Images.avatar}
         />
       </TouchableOpacity>
     ),
 
     headerRight: () => (
       <HeaderIconButton
-        onPress={() => navigate("/loginCalendar")}
+        onPress={() => Navigation.push(routes.loginCalendar)}
         icon={
           <MaterialCommunityIcons
             name="calendar-check"
@@ -48,7 +46,7 @@ export const screens = [
 
     headerLeft: () => (
       <HeaderIconButton
-        onPress={() => router.back()}
+        onPress={() => Navigation.back()}
         icon={
           <MaterialCommunityIcons
             name="arrow-left"
@@ -67,7 +65,7 @@ export const screens = [
 
     headerLeft: () => (
       <HeaderIconButton
-        onPress={() => router.back()}
+        onPress={() => Navigation.back()}
         icon={
           <MaterialCommunityIcons
             name="arrow-left"
@@ -86,7 +84,7 @@ export const screens = [
 
     headerLeft: () => (
       <HeaderIconButton
-        onPress={() => router.back()}
+        onPress={() => Navigation.back()}
         icon={
           <MaterialCommunityIcons
             name="arrow-left"
@@ -99,7 +97,7 @@ export const screens = [
 
     headerRight: () => (
       <HeaderIconButton
-        onPress={() => navigate("/settings")}
+        onPress={() => Navigation.push(routes.settings)}
         icon={
           <MaterialCommunityIcons name="cog" size={18} color={colors.primary} />
         }

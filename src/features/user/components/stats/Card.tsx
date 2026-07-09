@@ -3,7 +3,7 @@ import { BlurView } from "expo-blur";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { CardStatsProps as CardProps } from "../../types";
+import { CardStatsProps as CardProps } from "@/features/user/types";
 
 export const Card = ({ icon, value, label, fullWidth }: CardProps) => (
   <View style={[styles.cardWrapper, fullWidth && styles.fullWidth]}>

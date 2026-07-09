@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { NavigationActions } from "@/navigation";
 import { colors } from "@/theme/colors";
 import { Button } from "@/components/ui/Button/Button";
 import { OpenCaseButton } from "../OpenCaseButton";
@@ -11,10 +11,10 @@ export const ResultActionButtons = ({
   onSpin,
   onBack,
 }: ResultActionButtonsProps) => {
-  const { cases, onPressOpenCase } = useOpenCaseAction(onSpin);
-
-  const onPressRedirectToCardDetailsScreen = () =>
-    router.push(`/card/${winner.id}`);
+  const { cases, onPressOpenCase, onPressAddToCollection } = useOpenCaseAction(
+    onSpin,
+    onBack,
+  );
 
   return (
     <View style={styles.mainContainer}>
@@ -30,7 +30,7 @@ export const ResultActionButtons = ({
           isDefault
           title="Dodaj do kolekcji"
           iconName="plus-circle"
-          onPress={onBack}
+          onPress={onPressAddToCollection}
         />
       )}
       <Button
@@ -38,7 +38,7 @@ export const ResultActionButtons = ({
         variant="outline"
         style={{ ...styles.button, ...styles.buttonOutline }}
         textStyle={{ ...styles.buttonText, ...styles.buttonOutlineText }}
-        onPress={onPressRedirectToCardDetailsScreen}
+        onPress={() => NavigationActions.openHeroCard(winner.id)}
       />
     </View>
   );

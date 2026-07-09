@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { capitalize } from "@/utils/capitalize";
+import { getRarityLabel } from "@/features/caseOpening/utils/getRarityLabel";
 import { HeroChancesRowProps } from "../types";
 
 export const HeroDescription = ({ rarity, item }: HeroChancesRowProps) => {
@@ -17,7 +18,7 @@ export const HeroDescription = ({ rarity, item }: HeroChancesRowProps) => {
         <View>
           <Text style={styles.titleText}>{item.name}</Text>
           <Text style={styles.descriptionText}>
-            {capitalize(item.rarity)} • {item.id}
+            {capitalize(getRarityLabel(item.rarity))} • {item.class}
           </Text>
         </View>
       </View>

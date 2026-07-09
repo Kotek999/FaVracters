@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
+import { getRarityLabel } from "@/features/caseOpening/utils/getRarityLabel";
 import { Card } from "./Card";
-import { CollectionProps } from "../../types";
+import { CollectionProps } from "@/features/user/types";
 
 export const Collection = ({ stats, highestCardRarity }: CollectionProps) => {
   const highestRarity: string =
-    highestCardRarity === null ? "Brak" : highestCardRarity;
+    highestCardRarity === null ? "Brak" : getRarityLabel(highestCardRarity);
 
   return (
     <>

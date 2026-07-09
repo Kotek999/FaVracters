@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Item as Activity } from "./Item";
 import { ItemEmptyState as ActivityEmptyState } from "./ItemEmptyState";
-import { ItemsProps } from "../../types";
+import { ItemsProps } from "@/features/home/types";
 
 export const Items = ({ activities }: ItemsProps) => {
   return (

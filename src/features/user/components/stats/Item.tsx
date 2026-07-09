@@ -4,7 +4,7 @@ import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { Collection } from "./Collection";
 import { LoginStreak } from "./LoginStreak";
-import { ItemProps } from "../../types";
+import { ItemProps } from "@/features/user/types";
 
 export const Item = ({
   stats,

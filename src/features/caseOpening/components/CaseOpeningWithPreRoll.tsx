@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ImageSourcePropType } from "react-native";
+import { Images } from "@/assets/images/characters";
 import { CaseOpening } from "./CaseOpening";
 import { PreRollView } from "./PreRollView";
 import { usePitySystem } from "../hooks/usePitySystem";
@@ -12,8 +12,6 @@ export default function CaseOpeningWithPreRoll({
   items,
   onWin,
 }: CaseOpeningWithPreRollProps) {
-  const source: ImageSourcePropType = require("@/assets/images/case.png");
-
   const pity = usePitySystem();
   const preRoll = usePreRollAnimation(MOVE);
 
@@ -41,7 +39,7 @@ export default function CaseOpeningWithPreRoll({
   return (
     <SafeAreaWithScrollView edges={["top", "bottom"]}>
       <PreRollView
-        source={source}
+        source={Images.case}
         styleTL={preRoll.styleTL}
         styleTR={preRoll.styleTR}
         styleBL={preRoll.styleBL}

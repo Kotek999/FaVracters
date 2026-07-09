@@ -4,9 +4,9 @@ import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { BlurView } from "expo-blur";
 import { LOGIN_REWARDS } from "@/systems/progression/loginRewards";
-import { formatDays } from "../../utils/formatDays";
+import { formatDays } from "@/features/user/utils/formatDays";
 import { ProgressLines } from "../ProgressLines";
-import { LoginStreakStatsProps } from "../../types";
+import { LoginStreakStatsProps } from "@/features/user/types";
 
 export const LoginStreak = ({ loginStreakDay }: LoginStreakStatsProps) => {
   return (

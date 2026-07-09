@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { RewardProps } from "../../types";
+import { RewardProps } from "@/features/loginCalendar/types";
 
 export const Reward = ({ type, reward, iconName }: RewardProps) => {
   if (!(type in reward)) return null;

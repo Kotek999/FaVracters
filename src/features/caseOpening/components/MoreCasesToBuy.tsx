@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { router } from "expo-router";
+import { Navigation, routes } from "@/navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { screenWidth } from "@/utils/dimensions";
 import { BlurView } from "expo-blur";
@@ -8,8 +8,6 @@ import { fonts } from "@/theme/fonts";
 import { Button } from "@/components/ui/Button/Button";
 
 export const MoreCasesToBuy = () => {
-  const onPressRedirectToShopScreen = () => router.push("/shop");
-
   return (
     <View style={styles.mainContainer}>
       <BlurView intensity={8} tint="light" style={styles.blurContainer}>
@@ -29,7 +27,7 @@ export const MoreCasesToBuy = () => {
             title="Przejdź do sklepu"
             variant="secondary"
             textStyle={{ color: colors.textDark }}
-            onPress={onPressRedirectToShopScreen}
+            onPress={() => Navigation.push(routes.shop)}
           />
         </View>
       </BlurView>

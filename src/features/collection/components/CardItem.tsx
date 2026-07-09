@@ -1,35 +1,29 @@
 import { memo } from "react";
-import { router } from "expo-router";
+import { NavigationActions } from "@/navigation";
 import { useCardItemLevel } from "../hooks/useCardItemLevel";
 import { CardLockedItem } from "./cardLocked/CardLockedItem";
 import { CardUnlockedItem } from "./cardUnlocked/CardUnlockedItem";
 import { CardItemProps } from "../types";
-import { ImageSourcePropType } from "react-native";
 
 export const CardItem = memo(({ item }: CardItemProps) => {
   const { progress, imageSource, level, xp, xpNeeded, onLevelUp, canLevelUp } =
     useCardItemLevel({ item: item });
-
-  const onPressRedirectToHeroCardScreen = () => router.push(`/card/${item.id}`);
 
   return (
     <>
       {progress ? (
         <CardUnlockedItem
           item={item}
-          imageSource={imageSource as ImageSourcePropType}
+          imageSource={imageSource}
           xp={xp}
           xpNeeded={xpNeeded}
           cardLevel={level}
           canLevelUp={canLevelUp}
           onLevelUp={onLevelUp}
-          onPress={onPressRedirectToHeroCardScreen}
+          onPress={() => NavigationActions.openHeroCard(item.id)}
         />
       ) : (
-        <CardLockedItem
-          imageSource={imageSource as ImageSourcePropType}
-          cardRarity={item.rarity}
-        />
+        <CardLockedItem imageSource={imageSource} cardRarity={item.rarity} />
       )}
     </>
   );

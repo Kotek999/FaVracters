@@ -1,4 +1,5 @@
 import { Children } from "@/types/global";
+import { LanguageCode } from "@/features/user/types";
 
 export interface TitleProps {
   title: string;
@@ -7,8 +8,6 @@ export interface TitleProps {
 export interface OptionProps extends TitleProps {
   renderElement: Children;
 }
-
-export type LanguageCode = "pl" | "en" | "de" | "es";
 
 export interface Language {
   code: LanguageCode;

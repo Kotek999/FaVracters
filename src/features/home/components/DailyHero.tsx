@@ -1,5 +1,6 @@
 import { Text } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
+import { Images } from "@/assets/images/characters";
 import { screenWidth, screenHeight } from "@/utils/dimensions";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";
@@ -11,11 +12,9 @@ import { DailyHeroDescriptionWithButton } from "./DailyHeroDescriptionWithButton
 export const DailyHero = () => {
   const { dailyHeroConfig, onPressGoToScreen, isHeroOwned } = useDailyHero();
 
-  const source = require("@/assets/images/unknownHero.png");
-
   return (
     <ImageWithGradient
-      source={isHeroOwned ? dailyHeroItem.image : source}
+      source={isHeroOwned ? dailyHeroItem.image : Images.unknownHero}
       style={styles.imageContainer}
       gradientColors={[colors.blank, colors.opacityDark]}
       gradientStyle={styles.gradientContainer}

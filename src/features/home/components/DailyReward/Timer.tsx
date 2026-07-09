@@ -2,8 +2,8 @@ import { Text } from "@ui-kitten/components";
 import { View, StyleSheet } from "react-native";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";
-import { getTimerValues } from "../../utils/getTimerValues";
-import { TimerProps } from "../../types";
+import { getTimerValues } from "@/features/home/utils/getTimerValues";
+import { TimerProps } from "@/features/home/types";
 
 export const Timer = ({ hours, minutes, seconds }: TimerProps) => {
   const boxes = getTimerValues({ hours, minutes, seconds });

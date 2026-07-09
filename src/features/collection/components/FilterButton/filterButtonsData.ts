@@ -1,4 +1,4 @@
-import { FilterButtonsData } from "../../types";
+import { FilterButtonsData } from "@/features/collection/types";
 
 export const filterButtonsData: FilterButtonsData = [
   {

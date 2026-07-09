@@ -4,7 +4,7 @@ import { Today } from "../day/Today";
 import { CheckmarkIcon } from "../day/CheckmarkIcon";
 import { RewardItem } from "../day/RewardItem";
 import { Title } from "../day/Title";
-import { DayItemProps } from "../../types";
+import { DayItemProps } from "@/features/loginCalendar/types";
 
 export const Item = ({
   day,

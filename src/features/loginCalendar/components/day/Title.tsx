@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { TitleProps } from "../../types";
+import { TitleProps } from "@/features/loginCalendar/types";
 
 export const Title = ({ isToday, day }: TitleProps) => {
   return (

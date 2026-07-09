@@ -2,10 +2,10 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
+import { screenWidth } from "@/utils/dimensions";
 import { rarityColor } from "@/features/caseOpening/consts";
 import { Title } from "../day/Title";
-import { EpicHeroItemProps } from "../../types";
-import { screenWidth } from "@/utils/dimensions";
+import { EpicHeroItemProps } from "@/features/loginCalendar/types";
 
 export const EpicHeroItem = ({
   epicHeroReward,

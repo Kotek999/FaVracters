@@ -3,7 +3,7 @@ import { useUserStore } from "@/features/user/store/useUserStore";
 import { collectionStore } from "@/features/collection/store/collectionStore";
 import { getEpicHeroReward } from "../utils/getEpicHeroReward";
 import { getRewardMessage } from "../utils/getRewardMessage";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
+import { toast } from "@/components/ui/Toast/ToastService";
 
 export const useClaimReward = () => {
   const {
@@ -24,7 +24,7 @@ export const useClaimReward = () => {
     const message = getRewardMessage(reward);
 
     if (!message) return;
-    showToastMessageInfo("Nagroda logowania", message);
+    toast.success("Nagroda logowania", message);
   };
 
   const onPressClaimDayEpicReward = () => {
@@ -34,7 +34,7 @@ export const useClaimReward = () => {
     if (!hero) return;
     collectionStore.getState().addDuplicate(hero.id, hero.rarity);
 
-    showToastMessageInfo("Wielka Nagroda!", `Otrzymano ${hero.name}`);
+    toast.success("Wielka Nagroda!", `Otrzymano ${hero.name}`);
     clearDailyEpicReward();
   };
 

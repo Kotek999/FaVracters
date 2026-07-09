@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { NavigationActions } from "@/navigation/NavigationActions";
 import { dailyHeroItem } from "../utils/dailyHeroItem";
 import { useCollectionStore } from "@/features/collection/store/useCollectionStore";
 
@@ -7,15 +7,7 @@ export const useDailyHero = () => {
   const isHeroOwned = useIsOwned(dailyHeroItem.id);
 
   const onPressGoToScreen = () => {
-    if (isHeroOwned) {
-      router.push({
-        pathname: `/card/${dailyHeroItem.id}`,
-      });
-    } else {
-      router.push({
-        pathname: "/case",
-      });
-    }
+    NavigationActions.openHero(dailyHeroItem.id, isHeroOwned);
   };
 
   const dailyHeroConfig = isHeroOwned

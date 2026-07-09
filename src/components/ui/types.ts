@@ -1,5 +1,7 @@
 import { ColorValue, TextStyle, ViewStyle } from "react-native";
 import { BaseToastProps } from "react-native-toast-message";
+import { TOAST_VARIANTS } from "./Toast/ToastConfig";
+import { IconName } from "@/types/global";
 
 export type Variant = "primary" | "secondary" | "outline";
 export type Position = "left" | "right";
@@ -16,24 +18,13 @@ export interface ButtonProps {
   textStyle?: TextStyle;
 }
 
-export const TOAST_TYPES = {
-  SUCCESS: "success",
-  ERROR: "error",
-  INFO: "info",
-} as const;
+export type ToastType = keyof typeof TOAST_VARIANTS;
 
-export type ToastType = (typeof TOAST_TYPES)[keyof typeof TOAST_TYPES];
-
-export interface ToastPayload {
-  title: string;
-  message?: string;
-  duration?: number;
-}
-
-export interface ToastOptions<T extends ToastType = ToastType> {
-  type: T;
-  payload: ToastPayload;
-}
+export type ToastVariantsConfig = {
+  readonly icon: IconName;
+  readonly iconColor: string;
+  readonly borderColor: string;
+};
 
 export type ToastProps = BaseToastProps & {
   variant: ToastType;

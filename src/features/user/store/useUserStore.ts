@@ -14,6 +14,7 @@ export const useUserStore = () => {
   const activities = userStore((state) => state.activities);
   const energy = userStore((state) => state.energy);
   const dailyEpicReward = userStore((state) => state.dailyEpicReward);
+  const lang = userStore((state) => state.language);
 
   const rollDailyEpicReward = userStore((state) => state.rollDailyEpic);
   const clearDailyEpicReward = userStore((state) => state.clearDailyEpic);
@@ -42,6 +43,7 @@ export const useUserStore = () => {
     activities,
     energy,
     dailyEpicReward,
+    lang,
     rollDailyEpicReward,
     clearDailyEpicReward,
     claimDailyReward,

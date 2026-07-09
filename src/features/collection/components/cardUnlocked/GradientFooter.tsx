@@ -3,7 +3,7 @@ import { colors } from "@/theme/colors";
 import { screenHeight } from "@/utils/dimensions";
 import { LinearGradient } from "expo-linear-gradient";
 import { HeroInfo } from "../HeroInfo";
-import { GradientFooterProps } from "../../types";
+import { GradientFooterProps } from "@/features/collection/types";
 
 export const GradientFooter = ({
   cardRarity,

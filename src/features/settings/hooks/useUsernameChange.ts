@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { router } from "expo-router";
+import { Navigation, routes } from "@/navigation";
 import { validateUsername } from "../utils/validateUsername";
 import { useUserStore } from "@/features/user/store/useUserStore";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
+import { toast } from "@/components/ui/Toast/ToastService";
 
 export const useUsernameChange = () => {
   const { userName, setName } = useUserStore();
@@ -39,8 +39,8 @@ export const useUsernameChange = () => {
     setName(value);
     setDirty(false);
 
-    showToastMessageInfo("Zmiana nazwy", "Pomyślnie zmieniono nazwę!");
-    router.navigate("/userProfile");
+    toast.success("Zmiana nazwy", "Pomyślnie zmieniono nazwę!");
+    Navigation.push(routes.userProfile);
   };
 
   return {

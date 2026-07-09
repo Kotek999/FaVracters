@@ -1,12 +1,14 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { colors } from "@/theme/colors";
 import { rarityColor } from "@/features/caseOpening/consts";
+import { getRarityLabel } from "@/features/caseOpening/utils/getRarityLabel";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { createActivityConfig } from "./createActivityConfig";
 
 export const activityConfig = createActivityConfig({
   HERO_UNLOCK: {
-    title: (activity) => `Znalazłeś ${activity.rarity.toUpperCase()} Hero!`,
+    title: (activity) =>
+      `Odkryto ${getRarityLabel(activity.rarity, "hero")} bohatera!`,
     description: (activity) => `${activity.heroName} dodany do kolekcji`,
     backgroundColor: colors.backgroundDarkGreen,
     icon: (activity) => (

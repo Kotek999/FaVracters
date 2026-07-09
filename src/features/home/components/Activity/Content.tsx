@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { timeAgo } from "@/systems/time/timeAgo";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";
-import { callUI } from "../../utils/callUI";
+import { callUI } from "@/features/home/utils/callUI";
 import { Activity } from "@/features/user/types";
 
 export const Content = ({ activity }: { activity: Activity }) => {

@@ -4,7 +4,7 @@ import { LOGIN_REWARDS } from "@/systems/progression/loginRewards";
 import { useUserStore } from "@/features/user/store/useUserStore";
 import { screenWidth } from "@/utils/dimensions";
 import { Day } from "./Day";
-import { getEpicHeroReward } from "../../utils/getEpicHeroReward";
+import { getEpicHeroReward } from "@/features/loginCalendar/utils/getEpicHeroReward";
 
 export const Days = () => {
   const { loginStreakDay, dailyEpicReward } = useUserStore();

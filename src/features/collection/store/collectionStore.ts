@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { zustandStorage } from "@/utils/storage";
+import { zustandStorage, STORAGE_KEYS } from "@/utils/storage";
 import { immer } from "zustand/middleware/immer";
 import {
   DUPLICATE_XP,
@@ -8,28 +8,13 @@ import {
   getCardXpNeeded,
 } from "@/systems/progression/cardXp";
 import { RARITY_ORDER } from "@/systems/progression/card";
-import type {
-  CollectionState,
-  CollectionActions,
-  CardProgress,
-} from "../types";
-
-const STORAGE_KEY = "collection-storage";
-
-const state = {
-  items: {},
-  ownedCardsCount: 0,
-  highestCardRarity: null,
-};
-
-const initialState = (): Omit<CollectionState, CollectionActions> => ({
-  ...state,
-});
+import { initialState } from "../utils/initialCollectionConfig";
+import type { CollectionState, CardProgress } from "../types";
 
 export const collectionStore = create<CollectionState>()(
   persist(
     immer((set, get) => ({
-      ...state,
+      ...initialState(),
       addDuplicate: (id, rarity) => {
         const state = get();
         const current = state.items[id];
@@ -113,7 +98,7 @@ export const collectionStore = create<CollectionState>()(
       },
     })),
     {
-      name: STORAGE_KEY,
+      name: STORAGE_KEYS.collection,
       storage: zustandStorage,
 
       partialize: (state) => ({

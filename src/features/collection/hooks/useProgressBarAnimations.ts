@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { screenWidth } from "@/utils/dimensions";
+import { Time } from "@/systems/time/consts";
 import type { ProgressBarAnimationsProps } from "../types";
 
 export const useProgressBarAnimations = ({
@@ -41,12 +42,12 @@ export const useProgressBarAnimations = ({
       Animated.sequence([
         Animated.timing(pulseAnim, {
           toValue: 1.05,
-          duration: 1000,
+          duration: Time.SECOND,
           useNativeDriver: true,
         }),
         Animated.timing(pulseAnim, {
           toValue: 1,
-          duration: 1000,
+          duration: Time.SECOND,
           useNativeDriver: true,
         }),
       ]),

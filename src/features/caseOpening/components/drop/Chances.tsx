@@ -1,22 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Navigation, routes } from "@/navigation";
 import { screenHeight, screenWidth } from "@/utils/dimensions";
 import { BlurView } from "expo-blur";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { RarityRows as DropRarityRows } from "./RarityRows";
 
 export const Chances = () => {
-  const onPressRedirectToCaseDetailsScreen = () => router.push("/caseDetails");
-
   return (
     <View style={styles.mainContainer}>
       <BlurView intensity={7} tint="light" style={styles.blurContainer}>
         <View style={styles.container}>
           <Text style={styles.dropItemTitleText}>Możliwa zawartość</Text>
-          <TouchableOpacity onPress={onPressRedirectToCaseDetailsScreen}>
+          <TouchableOpacity onPress={() => Navigation.push(routes.caseDetails)}>
             <MaterialCommunityIcons
               color={colors.secondary}
               size={20}

@@ -5,10 +5,10 @@ import Animated, {
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import { colors } from "@/theme/colors";
-import { useExpandable } from "../../hooks/useExpandable";
+import { useExpandable } from "@/features/settings/hooks/useExpandable";
 import { StartContent } from "./StartContent";
 import { EndContent } from "./EndContent";
-import { UsernameChangeItemProps } from "../../types";
+import { UsernameChangeItemProps } from "@/features/settings/types";
 
 export const UsernameChangeItem = ({
   title,

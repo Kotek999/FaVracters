@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";
 import { rarityColor } from "@/features/caseOpening/consts";
+import { getRarityLabel } from "@/features/caseOpening/utils/getRarityLabel";
 import { Button } from "@/components/ui/Button/Button";
 import { dailyHeroItem } from "../utils/dailyHeroItem";
 import { DailyHeroDescriptionWithButtonProps } from "../types";
@@ -16,7 +17,9 @@ export const DailyHeroDescriptionWithButton = ({
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.heroRarityText}>{dailyHeroItem.rarity}</Text>
+        <Text style={styles.heroRarityText}>
+          {getRarityLabel(dailyHeroItem.rarity)}
+        </Text>
         <Text style={styles.heroLabelText}>{dailyHeroConfig.label}</Text>
       </View>
       <Button

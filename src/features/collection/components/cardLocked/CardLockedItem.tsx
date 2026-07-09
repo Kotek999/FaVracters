@@ -12,7 +12,7 @@ export const CardLockedItem = ({
   cardRarity,
 }: CardLockedItemProps) => {
   return (
-    <View style={{ ...styles.cardContainer, ...styles.cardLockedContainer }}>
+    <View style={[styles.cardContainer, styles.cardLockedContainer]}>
       <View style={styles.imageContainer}>
         <CardLocked imageSource={imageSource} cardRarity={cardRarity} />
       </View>

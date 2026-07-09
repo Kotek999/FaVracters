@@ -1,19 +1,18 @@
-import { StyleSheet, ImageSourcePropType } from "react-native";
+import { StyleSheet } from "react-native";
+import { Images } from "@/assets/images/characters";
 import { screenWidth, screenHeight } from "@/utils/dimensions";
 import { useCountdown } from "@/systems/time/useCountdown";
 import { ImageWithGradient } from "@/components/layout/ImageWithGradient";
 import { Content as DailyRewardContent } from "./Content";
 import { colors } from "@/theme/colors";
-import { ItemProps } from "../../types";
+import { ItemProps } from "@/features/home/types";
 
 export const Item = ({ dailyRewardAt, claimDailyReward }: ItemProps) => {
   const { hours, minutes, seconds, isReady } = useCountdown(dailyRewardAt);
 
-  const source: ImageSourcePropType = require("@/assets/images/case.png");
-
   return (
     <ImageWithGradient
-      source={source}
+      source={Images.case}
       style={styles.imageContainer}
       gradientColors={[colors.opacityDark, colors.backgroundDarkGreen]}
       gradientStyle={styles.gradientContainer}

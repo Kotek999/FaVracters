@@ -2,20 +2,12 @@ import { Text } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
+import { useToastActions } from "@/hooks/useToastActions";
 import { Button } from "@/components/ui/Button/Button";
-import { showToastMessageInfo } from "@/components/ui/utils/showToastMessageInfo";
-import { FooterProps } from "../../types";
+import { FooterProps } from "@/features/home/types";
 
 export const Footer = ({ claimDailyReward, isReady }: FooterProps) => {
-  const onPressClaimDailyReward = () => {
-    const reward = claimDailyReward();
-    if (reward) {
-      showToastMessageInfo(
-        "Dzienna nagroda",
-        "Otrzymano 1 skrzynkę i 10 energii!",
-      );
-    }
-  };
+  const { onPressClaimDailyReward } = useToastActions();
 
   const rewardReadyText: string = !isReady
     ? "Odebrałeś swój dzienny pakiet, wróć kolejnego dnia."
@@ -32,7 +24,7 @@ export const Footer = ({ claimDailyReward, isReady }: FooterProps) => {
           variant="primary"
           disabled={!isReady}
           textStyle={styles.buttonText}
-          onPress={onPressClaimDailyReward}
+          onPress={() => onPressClaimDailyReward(claimDailyReward)}
         />
       </View>
     </View>

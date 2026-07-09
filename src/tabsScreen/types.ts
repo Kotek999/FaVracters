@@ -21,14 +21,6 @@ export type TabsScreenOptions =
 
 type ScreenName = "index" | "collection" | "case" | "userProfile";
 
-export type RoutePath =
-  | "/"
-  | "/collection"
-  | "/case"
-  | "/userProfile"
-  | "/loginCalendar"
-  | "/settings";
-
 export type ScreenConfig = {
   name: ScreenName;
   title: string;

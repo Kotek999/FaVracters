@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
 import { formatTime } from "@/systems/time/formatTime";
-import { useClaimReward } from "../../hooks/useClaimReward";
+import { useClaimReward } from "@/features/loginCalendar/hooks/useClaimReward";
 
 export const TimerWithButton = () => {
   const { lastLoginAt, loginStreakDay, rewardAvailable } = useUserStore();
