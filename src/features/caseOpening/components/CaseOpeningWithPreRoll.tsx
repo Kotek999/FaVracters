@@ -1,19 +1,24 @@
 import React, { useCallback } from "react";
-import { Images } from "@/assets/images/characters";
 import { CaseOpening } from "./CaseOpening";
 import { PreRollView } from "./PreRollView";
 import { usePitySystem } from "../hooks/usePitySystem";
 import { usePreRollAnimation } from "../hooks/usePreRollAnimation";
+import { getCase } from "../utils/getCase";
 import { MOVE } from "../consts";
 import { SafeAreaWithScrollView } from "@/components/layout/SafeAreaWithScrollView";
-import type { Character, CaseOpeningWithPreRollProps } from "../types";
+import { Character } from "@/types/character.types";
+import type { CaseOpeningWithPreRollProps } from "../types";
 
 export default function CaseOpeningWithPreRoll({
+  caseRef,
   items,
   onWin,
 }: CaseOpeningWithPreRollProps) {
+  const config = getCase(caseRef.category, caseRef.caseId);
   const pity = usePitySystem();
   const preRoll = usePreRollAnimation(MOVE);
+
+  const source = config.image;
 
   const handleWin = useCallback(
     (item: Character) => {
@@ -26,6 +31,7 @@ export default function CaseOpeningWithPreRoll({
   if (!preRoll.visible) {
     return (
       <CaseOpening
+        caseRef={caseRef}
         items={items}
         pityChance={pity.pityChance}
         getRarity={pity.getRarity}
@@ -39,7 +45,8 @@ export default function CaseOpeningWithPreRoll({
   return (
     <SafeAreaWithScrollView edges={["top", "bottom"]}>
       <PreRollView
-        source={Images.case}
+        caseRef={caseRef}
+        source={source}
         styleTL={preRoll.styleTL}
         styleTR={preRoll.styleTR}
         styleBL={preRoll.styleBL}

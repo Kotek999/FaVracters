@@ -1,5 +1,5 @@
 import { Animated, ImageSourcePropType } from "react-native";
-import type { Character, Rarity } from "../caseOpening";
+import { Rarity, Character } from "@/types/character.types";
 
 export interface CardItemProps {
   readonly item: Character;

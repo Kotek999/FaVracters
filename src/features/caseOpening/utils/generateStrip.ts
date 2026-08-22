@@ -1,6 +1,6 @@
 import { STRIP_LENGTH, WINNER_INDEX } from "../consts";
 import { getRandomIndex } from "./getRandomIndex";
-import { Character, RARITY } from "../types";
+import { Character, RARITY } from "@/types/character.types";
 
 export const generateStrip = (
   items: readonly Character[],

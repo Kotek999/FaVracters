@@ -5,16 +5,16 @@ import { HeroInfoConfigProps as MainInfoProps } from "@/features/heroCardDetails
 import { IconName } from "@/types/global";
 
 export const MainInfo = ({
-  cardClass,
+  cardRole,
   cardRarity,
-  cardOrigin,
-  cardFaction,
+  cardUniverse,
+  cardRace,
 }: MainInfoProps) => {
   const tiles = getHeroInfoConfig({
-    cardClass,
+    cardRole,
     cardRarity,
-    cardOrigin,
-    cardFaction,
+    cardUniverse,
+    cardRace,
   });
 
   return (

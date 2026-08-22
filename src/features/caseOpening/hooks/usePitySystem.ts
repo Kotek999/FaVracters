@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { BASE_LEGENDARY_CHANCE, MAX_BOOST } from "../consts";
-import { Character, Rarity, RARITY } from "../types";
+import { Character, Rarity, RARITY } from "@/types/character.types";
 
 export function usePitySystem() {
   const spins = useRef<number>(0);

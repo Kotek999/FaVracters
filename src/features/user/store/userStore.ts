@@ -11,6 +11,9 @@ import { LOGIN_DAYS, LOGIN_REWARDS } from "@/systems/progression/loginRewards";
 import { toast } from "@/components/ui/Toast/ToastService";
 import { Time } from "@/systems/time/consts";
 import { createInitialUser } from "../utils/initialUserConfig";
+import { addRandomCases } from "../utils/addRandomCases";
+import { getCaseAmount } from "@/features/caseOpening/utils/getCaseAmount";
+import { updateCaseAmount } from "@/features/caseOpening/utils/updateCaseAmount";
 import { UserState } from "../types";
 
 export const userStore = create<UserState>()(
@@ -32,8 +35,13 @@ export const userStore = create<UserState>()(
       setLanguage: (lang) => {
         set({ language: lang });
       },
+      addCase: (caseRef, amount = 1) => {
+        set((state) => ({
+          cases: updateCaseAmount(state.cases, caseRef, amount),
+        }));
+      },
       addXp: (amount) => {
-        const { level, xp, pendingCases, addActivity, addEnergy } = get();
+        const { level, xp, pendingCases } = get();
 
         if (level >= MAX_PLAYER_LEVEL) return;
 
@@ -45,10 +53,8 @@ export const userStore = create<UserState>()(
           const needed = getPlayerXpNeeded(newLevel);
 
           if (newXp < needed) break;
-
           newXp -= needed;
           newLevel++;
-
           reward += getRewardCases(newLevel);
         }
 
@@ -61,15 +67,14 @@ export const userStore = create<UserState>()(
         });
 
         if (newLevel > level) {
-          addActivity({
+          get().addActivity({
             type: "LEVEL_UP",
             level: newLevel,
-            reward: `+${reward} skrzynka`,
+            reward: reward > 0 ? `+${reward} skrzynka` : undefined,
             createdAt: Date.now(),
           });
 
-          addEnergy(level * 5);
-
+          get().addEnergy(level * 5);
           () =>
             toast.success(
               "Level Up!",
@@ -82,23 +87,26 @@ export const userStore = create<UserState>()(
         }
       },
       claimCases: () => {
-        const { pendingCases } = get();
+        const amount = get().pendingCases;
 
-        if (pendingCases === 0) return;
+        if (amount <= 0) return;
 
         set((state) => ({
-          cases: state.cases + state.pendingCases,
+          cases: addRandomCases(state.cases, amount),
           pendingCases: 0,
         }));
       },
-      useCase: () => {
-        const { cases } = get();
+      useCase: (caseRef) => {
+        const amount = getCaseAmount(get().cases, caseRef);
 
-        if (cases <= 0) return false;
+        if (amount <= 0) {
+          return false;
+        }
 
         set((state) => ({
-          cases: state.cases - 1,
+          cases: updateCaseAmount(state.cases, caseRef, -1),
         }));
+
         return true;
       },
       checkLoginStreak: () => {
@@ -170,8 +178,8 @@ export const userStore = create<UserState>()(
         });
 
         if ("cases" in reward) {
-          userStore.setState((state) => ({
-            cases: state.cases + reward.cases,
+          set((state) => ({
+            cases: addRandomCases(state.cases, reward.cases),
           }));
         }
 
@@ -189,46 +197,46 @@ export const userStore = create<UserState>()(
         return reward;
       },
       claimDailyReward: () => {
-        const { dailyRewardAt, addEnergy, addActivity } = get();
+        const { dailyRewardAt } = get();
+
         const now = Date.now();
 
         if (now < dailyRewardAt) return false;
 
-        (addEnergy(10),
-          set((state) => ({
-            energy: state.energy,
-            cases: state.cases + 1,
-            dailyRewardAt: now + Time.DAY,
-          })));
+        set((state) => ({
+          energy: state.energy + 10,
+          cases: addRandomCases(state.cases, 1),
+          dailyRewardAt: now + Time.DAY,
+        }));
 
-        addActivity({
+        get().addActivity({
           type: "REWARD_CLAIM",
           energy: 10,
           createdAt: Date.now(),
         });
+
         return true;
       },
-      addActivity: (activity) =>
+      addActivity: (activity) => {
         set((state) => {
-          const next = state.activities;
+          const next = [activity, ...state.activities].slice(0, 3);
 
-          next.unshift(activity);
-          if (next.length > 3) next.pop();
-
-          return { activities: next };
-        }),
+          return {
+            activities: next,
+          };
+        });
+      },
       addEnergy: (amount) =>
         set((state) => ({
           energy: state.energy + amount,
         })),
 
       spendEnergy: (amount) => {
-        const { energy, cases } = get();
+        const { energy } = get();
 
         if (energy < amount) return false;
 
         set({
-          cases: cases + 1,
           energy: energy - amount,
         });
 

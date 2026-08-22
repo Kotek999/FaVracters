@@ -5,6 +5,7 @@ import { ChancesWithButtonItem as DropChancesWithButtonItem } from "./drop/Chanc
 import { PreRollViewProps } from "../types";
 
 export const PreRollView = memo(function PreRollView({
+  caseRef,
   source,
   styleTL,
   styleTR,
@@ -21,7 +22,7 @@ export const PreRollView = memo(function PreRollView({
         styleBR={styleBR}
         source={source}
       />
-      <DropChancesWithButtonItem onOpen={onOpen} />
+      <DropChancesWithButtonItem caseRef={caseRef} onOpen={onOpen} />
     </View>
   );
 });

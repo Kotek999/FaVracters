@@ -1,6 +1,7 @@
 import { StyleProp, TextStyle } from "react-native";
-import { Rarity } from "../caseOpening";
+import { Rarity } from "@/types/character.types";
 import { IconName } from "@/types/global";
+import { CaseRef, CasesState } from "@/features/caseOpening/config/types";
 
 export type Activity =
   | {
@@ -34,31 +35,32 @@ export interface UserState {
   name: string;
   level: number;
   xp: number;
-  cases: number;
+  cases: CasesState;
   pendingCases: number;
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
-  setName: (newName: string) => void;
-  addXp: (amount: number) => void;
-  claimCases: () => void;
-  useCase: () => boolean;
+  energy: number;
   dailyRewardAt: number;
-  claimDailyReward: () => boolean;
   loginStreakDay: number;
   lastLoginAt: number;
   loginRewardAvailable: boolean;
+  activities: Activity[];
+  setName: (name: string) => void;
+  addXp: (amount: number) => void;
+  addCase: (caseRef: CaseRef, amount?: number) => void;
+  useCase: (caseRef: CaseRef) => boolean;
+  claimCases: () => void;
+  addEnergy: (amount: number) => void;
+  spendEnergy: (amount: number) => boolean;
+  addActivity: (activity: Activity) => void;
+  resetUser: () => void;
+  clearStorage: () => Promise<void>;
   checkLoginStreak: () => boolean;
   claimLoginStreakReward: () => LoginReward | null;
+  claimDailyReward: () => boolean;
   dailyEpicReward: string | null;
   rollDailyEpic: () => void;
   clearDailyEpic: () => void;
-  resetUser: () => void;
-  activities: Activity[];
-  addActivity: (activity: Activity) => void;
-  energy: number;
-  addEnergy: (amount: number) => void;
-  spendEnergy: (amount: number) => boolean;
-  clearStorage: () => Promise<void>;
 }
 
 export interface ProgressLinesProps {

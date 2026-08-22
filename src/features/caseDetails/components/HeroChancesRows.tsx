@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { screenWidth } from "@/utils/dimensions";
 import { colors } from "@/theme/colors";
@@ -5,10 +6,19 @@ import { BlurView } from "expo-blur";
 import { HeroChancesRow } from "./HeroChancesRow";
 import { LOW_RARITIES } from "../utils/lowRarities";
 import { getRarity } from "../utils/getRarity";
-import { sortedHeroes } from "../utils/sortedHeroes";
+import { getCasePool } from "@/features/caseOpening/utils/getCasePool";
+import { RARITY_CONFIG } from "../data/rarityConfig";
+import { HeroesRowsProps } from "../types";
 
-export const HeroChancesRows = () => {
-  const heroes = sortedHeroes;
+export const HeroChancesRows = ({ category, caseId }: HeroesRowsProps) => {
+  const heroes = useMemo(() => {
+    const pool = getCasePool(category, caseId);
+
+    return [...pool].sort(
+      (a, b) =>
+        RARITY_CONFIG[b.rarity].priority - RARITY_CONFIG[a.rarity].priority,
+    );
+  }, [category, caseId]);
 
   return (
     <View style={styles.mainContainer}>

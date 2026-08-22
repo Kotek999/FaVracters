@@ -1,5 +1,5 @@
 import { rarityLabels } from "../consts";
-import { RarityLabel } from "../types";
+import { RarityLabel } from "@/types/character.types";
 
 export const getRarityLabel = (
   rarity: RarityLabel,

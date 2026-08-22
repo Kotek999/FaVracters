@@ -8,6 +8,8 @@ import { fonts } from "@/theme/fonts";
 import { Button } from "@/components/ui/Button/Button";
 
 export const MoreCasesToBuy = () => {
+  const onPressRedirectToShopScreen = () => Navigation.push(routes.shop);
+
   return (
     <View style={styles.mainContainer}>
       <BlurView intensity={8} tint="light" style={styles.blurContainer}>
@@ -27,7 +29,7 @@ export const MoreCasesToBuy = () => {
             title="Przejdź do sklepu"
             variant="secondary"
             textStyle={{ color: colors.textDark }}
-            onPress={() => Navigation.push(routes.shop)}
+            onPress={onPressRedirectToShopScreen}
           />
         </View>
       </BlurView>

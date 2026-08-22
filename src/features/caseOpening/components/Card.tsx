@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, Image } from "react-native";
 import { ITEM_WIDTH, ITEM_HEIGHT, ITEM_SPACING, rarityColor } from "../consts";
-import { Character, RARITY } from "../types";
+import { Character, RARITY } from "@/types/character.types";
 
 export const Card = memo(({ item }: { item: Character }) => {
   const isLegendary = item.rarity === RARITY.LEGENDARY;

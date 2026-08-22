@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Images } from "@/assets/images/characters";
+import { Images } from "@/assets/images";
 import { getCardXpNeeded, MAX_CARD_LEVEL } from "@/systems/progression/cardXp";
 import { useCollectionStore } from "../store/useCollectionStore";
 import { useCardProgress } from "./useCardProgress";

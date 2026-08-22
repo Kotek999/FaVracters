@@ -5,12 +5,22 @@ import { DroppedCard } from "./drop/DroppedCard";
 import { ResultActionButtons } from "./drop/ResultActionButtons";
 import { ResultViewProps } from "@/features/caseOpening/types";
 
-export const ResultView = ({ winner, onSpin, onBack }: ResultViewProps) => {
+export const ResultView = ({
+  caseRef,
+  winner,
+  onSpin,
+  onBack,
+}: ResultViewProps) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>Wylosowano kartę</Text>
       <DroppedCard winner={winner} />
-      <ResultActionButtons winner={winner} onSpin={onSpin} onBack={onBack} />
+      <ResultActionButtons
+        caseRef={caseRef}
+        winner={winner}
+        onSpin={onSpin}
+        onBack={onBack}
+      />
     </View>
   );
 };

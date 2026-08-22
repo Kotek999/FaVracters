@@ -18,7 +18,7 @@ export const HeroDescription = ({ rarity, item }: HeroChancesRowProps) => {
         <View>
           <Text style={styles.titleText}>{item.name}</Text>
           <Text style={styles.descriptionText}>
-            {capitalize(getRarityLabel(item.rarity))} • {item.class}
+            {capitalize(getRarityLabel(item.rarity))} • {item.role}
           </Text>
         </View>
       </View>

@@ -4,32 +4,29 @@ import { getRarityLabel } from "@/features/caseOpening/utils/getRarityLabel";
 import { HeroInfoConfigProps } from "../types";
 
 export const getHeroInfoConfig = ({
-  cardClass,
+  cardRole,
   cardRarity,
-  cardOrigin,
-  cardFaction,
+  cardUniverse,
+  cardRace,
 }: HeroInfoConfigProps) => [
   {
     icon: "auto-fix",
-    value: cardClass,
+    value: cardRole,
     color: colors.textLightLime,
   },
-
   {
     icon: "medal",
     value: getRarityLabel(cardRarity),
     color: rarityColor[cardRarity],
   },
-
   {
     icon: "earth",
-    value: cardOrigin,
+    value: cardUniverse,
     color: colors.secondary,
   },
-
   {
     icon: "arrow-projectile-multiple",
-    value: cardFaction,
-    color: "#b0e966",
+    value: cardRace,
+    color: colors.textLightLime,
   },
 ];

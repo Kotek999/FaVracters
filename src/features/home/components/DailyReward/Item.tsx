@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Images } from "@/assets/images/characters";
+import { Images } from "@/assets/images";
 import { screenWidth, screenHeight } from "@/utils/dimensions";
 import { useCountdown } from "@/systems/time/useCountdown";
 import { ImageWithGradient } from "@/components/layout/ImageWithGradient";
@@ -12,7 +12,7 @@ export const Item = ({ dailyRewardAt, claimDailyReward }: ItemProps) => {
 
   return (
     <ImageWithGradient
-      source={Images.case}
+      source={Images.transformersAllCase}
       style={styles.imageContainer}
       gradientColors={[colors.opacityDark, colors.backgroundDarkGreen]}
       gradientStyle={styles.gradientContainer}

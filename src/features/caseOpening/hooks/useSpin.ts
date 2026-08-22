@@ -14,7 +14,8 @@ import { collectionStore } from "@/features/collection/store/collectionStore";
 import { PLAYER_XP_FROM_CARD } from "@/systems/progression/playerXp";
 import { userStore } from "@/features/user/store/userStore";
 import { getRandomFromPool } from "../utils/getRandomFromPool";
-import { Character, Stage, SpinProps } from "../types";
+import { Character } from "@/types/character.types";
+import { Stage, SpinProps } from "../types";
 
 export const useSpin = ({ items, pools, getRarity, onWin }: SpinProps) => {
   const [stage, setStage] = useState<Stage>("spin");

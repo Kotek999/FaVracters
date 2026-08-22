@@ -13,7 +13,7 @@ export const CategoryTitle = ({ title }: CategoryTitleProps) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 3,
     alignItems: "flex-start",
     justifyContent: "center",
   },

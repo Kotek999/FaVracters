@@ -1,27 +1,30 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import { Images } from "@/assets/images/characters";
 import { screenHeight } from "@/utils/dimensions";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button/Button";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { PrimaryCaseToBuyProps } from "@/features/shop/types";
+import { PrimaryCaseToBuyProps } from "../types";
 
-export const PrimaryCaseToBuy = ({ onPress }: PrimaryCaseToBuyProps) => {
+export const PrimaryCaseToBuy = ({ item, onPress }: PrimaryCaseToBuyProps) => {
   return (
     <View>
       <View style={styles.mainContainer}>
         <View style={styles.imageContainer}>
-          <Image source={Images.case} style={styles.image} resizeMode="cover" />
+          <Image
+            source={item.config.image}
+            style={styles.image}
+            resizeMode="cover"
+          />
           <View style={styles.caseContainer}>
             <Text style={[styles.titleText, styles.shadowText]}>
-              Skrzynia Bohaterów
+              {item.config.name}
             </Text>
             <Text style={[styles.descriptionText, styles.shadowText]}>
-              x1 Skrzynka
+              x1 Skrzynka • {item.config.description}
             </Text>
             <Button
-              title="$4.99 lub 25 Energii"
+              title="Kup pakiet"
               variant="secondary"
               style={styles.button}
               textStyle={styles.buttonText}
@@ -37,7 +40,12 @@ export const PrimaryCaseToBuy = ({ onPress }: PrimaryCaseToBuyProps) => {
             />
           </View>
           <View style={styles.badge}>
-            <Text style={styles.countText}>HOT</Text>
+            <Text style={styles.countText}>{item.config.price}</Text>
+            <MaterialCommunityIcons
+              name="lightning-bolt"
+              size={18}
+              color={colors.secondary}
+            />
           </View>
         </View>
       </View>
@@ -67,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   caseContainer: {
-    backgroundColor: colors.backgroundPrimary,
+    backgroundColor: colors.backgroundNavDarkGreen,
     position: "absolute",
     bottom: 0,
     left: 0,
@@ -99,16 +107,20 @@ const styles = StyleSheet.create({
     color: colors.textDark,
   },
   badge: {
+    flexDirection: "row",
+    alignItems: "center",
     position: "absolute",
     top: 12,
     right: 12,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.backgroundPrimary,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
+    gap: 2,
   },
   countText: {
-    color: colors.textDark,
-    fontFamily: fonts.bold,
+    fontSize: 16,
+    color: colors.white,
+    fontFamily: fonts.semibold,
   },
 });

@@ -1,4 +1,4 @@
-import { CharacterStats } from "@/features/caseOpening/types";
+import { CharacterStats } from "@/types/character.types";
 
 export const calculateRating = (stats: CharacterStats): number => {
   const weighted =

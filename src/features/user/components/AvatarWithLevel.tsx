@@ -1,6 +1,6 @@
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 import { View, StyleSheet, Image } from "react-native";
-import { Images } from "@/assets/images/characters";
+import { Images } from "@/assets/images";
 import { SIZE, STROKE_WIDTH, RADIUS, CIRCUMFERENCE } from "../consts";
 import { colors } from "@/theme/colors";
 import { ProgressProps as AvatarWithLevelProps } from "../types";

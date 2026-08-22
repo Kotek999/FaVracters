@@ -1,19 +1,21 @@
 import { toast } from "@/components/ui/Toast/ToastService";
 import { NewHeroCardProps } from "@/features/caseOpening";
+import { useUserStore } from "@/features/user/store/useUserStore";
+import { CaseRef } from "@/features/caseOpening/config/types";
 
 export const useToastActions = () => {
-  const buyCase = (spendEnergy: (amount: number) => boolean) => {
-    const success = spendEnergy(25);
+  const { spendEnergy, addCase } = useUserStore();
 
-    if (!success) {
+  const buyCase = (caseRef: CaseRef, price: number) => {
+    if (!spendEnergy(price)) {
       toast.error(
         "Zakup nieudany - Brak energii",
         "Zdobądź lub kup potrzebną walutę",
       );
       return;
-    } else {
-      toast.success("Zakup udany", "Dodano nową zawartość");
     }
+    addCase(caseRef);
+    toast.success("Zakup udany", "Dodano nową zawartość");
   };
 
   const newHeroCard = ({ result, item, playerXp }: NewHeroCardProps) => {

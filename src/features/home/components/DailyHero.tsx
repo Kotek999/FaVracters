@@ -1,6 +1,6 @@
 import { Text } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { Images } from "@/assets/images/characters";
+import { Images } from "@/assets/images";
 import { screenWidth, screenHeight } from "@/utils/dimensions";
 import { fonts } from "@/theme/fonts";
 import { colors } from "@/theme/colors";

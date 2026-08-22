@@ -7,14 +7,14 @@ import { screenWidth } from "@/utils/dimensions";
 import { UserCasesWithEnergyProps } from "../types";
 
 export const UserCasesWithEnergy = ({
-  cases,
+  amount,
   energy,
 }: UserCasesWithEnergyProps) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>Twoje Zdobycze</Text>
       <View style={styles.cardsContainer}>
-        <Card icon="treasure-chest" value={`x${cases}`} label="Skrzynia" />
+        <Card icon="treasure-chest" value={`x${amount}`} label="Skrzynia" />
         <Card
           icon="lightning-bolt"
           value={formatNumberShort(energy)}

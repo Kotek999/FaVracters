@@ -9,6 +9,7 @@ import { useCaseSpin } from "../hooks/useCaseSpin";
 import { CaseOpeningProps } from "../types";
 
 export const CaseOpening = ({
+  caseRef,
   items,
   pityChance,
   getRarity,
@@ -38,6 +39,7 @@ export const CaseOpening = ({
       {stage === "result" && winner && (
         <SafeAreaWithScrollView edges={["top", "bottom"]}>
           <ResultView
+            caseRef={caseRef}
             winner={winner}
             pityChance={pityChance}
             onSpin={handleOpenAgain}

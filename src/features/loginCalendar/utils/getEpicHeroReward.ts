@@ -1,8 +1,8 @@
-import { characters } from "@/data/characters";
-import { Character } from "@/features/caseOpening";
+import { allCharacters } from "@/data/characters";
+import { Character } from "@/types/character.types";
 
 export const getEpicHeroReward = (
   dailyEpicReward: string | null,
 ): Character | undefined => {
-  return characters.find((character) => character.id === dailyEpicReward);
+  return allCharacters.find((character) => character.id === dailyEpicReward);
 };

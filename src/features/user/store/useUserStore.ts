@@ -26,7 +26,7 @@ export const useUserStore = () => {
   const setName = userStore((state) => state.setName);
   const setLanguage = userStore((state) => state.setLanguage);
   const spendEnergy = userStore((state) => state.spendEnergy);
-
+  const addCase = userStore((state) => state.addCase);
   const clearUserStorage = userStore((state) => state.clearStorage);
 
   return {
@@ -54,6 +54,7 @@ export const useUserStore = () => {
     setName,
     setLanguage,
     spendEnergy,
+    addCase,
     clearUserStorage,
   };
 };

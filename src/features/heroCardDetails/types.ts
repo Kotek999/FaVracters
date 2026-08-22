@@ -1,11 +1,12 @@
-import {
-  CharacterClass,
-  CharacterStats,
-  Faction,
-  Rarity,
-} from "../caseOpening";
-import { Children, IconName } from "@/types/global";
 import { ColorValue, ImageSourcePropType } from "react-native";
+import {
+  CharacterStats,
+  CharacterRole,
+  Rarity,
+  CharacterRace,
+  CharacterUniverse,
+} from "@/types/character.types";
+import { Children, IconName } from "@/types/global";
 
 export interface Tier<T> {
   readonly min: number;
@@ -55,10 +56,10 @@ export interface CardNameWithStarsProps {
 }
 
 export interface HeroInfoConfigProps {
-  cardClass: CharacterClass;
   cardRarity: Rarity;
-  cardOrigin: string;
-  cardFaction: Faction;
+  cardUniverse: CharacterUniverse;
+  cardRole: CharacterRole;
+  cardRace: CharacterRace;
 }
 
 type StatTiers = Record<keyof CharacterStats, ProgressColorsProp>;

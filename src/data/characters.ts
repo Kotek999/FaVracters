@@ -1,10 +1,4 @@
-import { Character } from "@/features/caseOpening/types";
+import { buildCharacters } from "./characters/helpers/buildCharacters";
 import { charactersRegistry } from "./characters.registry";
-import { characterImages } from "@/assets/images/characters";
 
-export const characters: Character[] = Object.values(charactersRegistry).map(
-  (character) => ({
-    ...character,
-    image: characterImages[character.key],
-  }),
-);
+export const allCharacters = buildCharacters(charactersRegistry);

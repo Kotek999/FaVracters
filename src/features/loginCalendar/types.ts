@@ -1,5 +1,5 @@
 import { IconName } from "@/types/global";
-import { Character } from "../caseOpening";
+import { Character } from "@/types/character.types";
 import { LoginReward } from "../user/types";
 
 export interface TodayProps {

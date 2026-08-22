@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { collectionStore } from "../store/collectionStore";
-import { Character } from "@/features/caseOpening";
+import { CharacterWithRating } from "@/types/character.types";
 import { FilterMode, Filter } from "../types";
 
-export const useCollectionFilters = (data: Character[]) => {
+export const useCollectionFilters = (data: CharacterWithRating[]) => {
   const items = collectionStore((state) => state.items);
-  const [filterMode, setFilterMode] = useState<FilterMode>(Filter.ALL);
+  const [filterMode, setFilterMode] = useState<FilterMode>(Filter.OWNED);
 
   const filteredData = useMemo(() => {
     if (!data?.length) return [];

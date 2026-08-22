@@ -1,4 +1,4 @@
-import { characters } from "@/data/characters";
+import { allCharacters } from "@/data/characters";
 import { Time } from "@/systems/time/consts";
 
 const getDayOfYear = () => {
@@ -17,4 +17,4 @@ const getDailyIndex = (length: number) => {
   return Math.floor(random * length);
 };
 
-export const dailyHeroItem = characters[getDailyIndex(characters.length)];
+export const dailyHeroItem = allCharacters[getDailyIndex(allCharacters.length)];

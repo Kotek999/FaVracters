@@ -4,6 +4,7 @@ export const routes = {
   case: "/case",
   caseSpin: "/caseSpin",
   caseDetails: "/caseDetails",
+  cardId: "/card/[id]",
   loginCalendar: "/loginCalendar",
   userProfile: "/userProfile",
   shop: "/shop",

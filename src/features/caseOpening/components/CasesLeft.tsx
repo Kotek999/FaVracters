@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
 import { fonts } from "@/theme/fonts";
-import { PrimaryCaseProps as CasesLeftProps } from "../types";
+import { CasesLeftProps } from "../types";
 
-export const CasesLeft = ({ cases }: CasesLeftProps) => {
+export const CasesLeft = ({ amount }: CasesLeftProps) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.leftText}>Pozostało</Text>
       <View style={styles.container}>
-        <Text style={styles.casesCountText}>{cases}</Text>
+        <Text style={styles.casesCountText}>{amount}</Text>
         <MaterialCommunityIcons
           name="treasure-chest"
           size={26}

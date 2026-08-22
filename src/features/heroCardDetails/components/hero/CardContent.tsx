@@ -33,10 +33,10 @@ export const CardContent = ({ card }: CardContentProps) => {
           iconName="information-box"
         />
         <MainInfo
-          cardClass={card.class}
+          cardRole={card.role}
           cardRarity={card.rarity}
-          cardOrigin={card.origin}
-          cardFaction={card.faction}
+          cardUniverse={card.universe}
+          cardRace={card.race}
         />
         <SectionTitle title="Dane wydajnościowe" iconName="chart-box" />
         <Stats cardStats={card.stats} cardRating={card.rating} />

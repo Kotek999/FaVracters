@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { RenderCardItem } from "@/features/collection/components/CardItem";
-import type { Character } from "@/features/caseOpening";
+import { Character } from "@/types/character.types";
 import type { CardItemProps } from "@/features/collection/types";
 
 export const useFlashListActions = () => {

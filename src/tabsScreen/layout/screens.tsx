@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { Navigation, routes } from "@/navigation";
 import { Avatar } from "@ui-kitten/components";
 import { colors } from "@/theme/colors";
-import { Images } from "@/assets/images/characters";
+import { Images } from "@/assets/images";
 import { HeaderIconButton } from "@/tabsScreen/components/HeaderIconButton";
 import { ScreenConfig } from "@/tabsScreen/types";
 
